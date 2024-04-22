@@ -1,8 +1,8 @@
 import '../css/bootstrap.min.css'
 import '../css/vendor.css'
-import imgBanner from '../images/banner-image.png'
+import imgBanner from './images/banner-image.png'
 
-function Banner(){
+function Carrusel(){
     return(
     <>
         <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
@@ -58,4 +58,4 @@ function Banner(){
     </>
     )
 }
-export default Banner
+export default Carrusel
