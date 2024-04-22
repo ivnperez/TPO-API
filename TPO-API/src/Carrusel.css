@@ -1,0 +1,4 @@
+.banner-image{
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen al contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente */
+}
