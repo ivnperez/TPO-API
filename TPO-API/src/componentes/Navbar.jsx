@@ -1,6 +1,6 @@
-import imgLogo from './images//main-logo.png'
-import './css/bootstrap.min.css'
-import './css/vendor.css'
+import imgLogo from '../images//main-logo.png'
+import '../css/bootstrap.min.css'
+import '../css/vendor.css'
 function Navbar(){
     return(
     <>

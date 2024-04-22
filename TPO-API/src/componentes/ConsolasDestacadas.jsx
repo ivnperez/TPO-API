@@ -1,3 +1,5 @@
+import '../css/bootstrap.min.css'
+import '../css/vendor.css'
 
 function ConsolasDestacadas(){
     return(

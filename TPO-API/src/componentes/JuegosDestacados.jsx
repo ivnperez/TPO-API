@@ -1,5 +1,5 @@
-import './css/bootstrap.min.css'
-import './css/vendor.css'
+import '../css/bootstrap.min.css'
+import '../css/vendor.css'
 
 function JuegosDestacados(){
     return(

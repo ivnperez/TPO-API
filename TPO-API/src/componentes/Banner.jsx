@@ -1,6 +1,6 @@
-import './css/bootstrap.min.css'
-import './css/vendor.css'
-import imgBanner from './images/banner-image.png'
+import '../css/bootstrap.min.css'
+import '../css/vendor.css'
+import imgBanner from '../images/banner-image.png'
 
 function Banner(){
     return(
