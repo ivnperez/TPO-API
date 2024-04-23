@@ -1,6 +1,6 @@
-import '../css/bootstrap.min.css'
 import '../css/vendor.css'
 import '../css/Carrusel.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import imgBanner from '../images/banner-image.png'
 
 function Banner(){

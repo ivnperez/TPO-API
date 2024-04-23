@@ -1,5 +1,5 @@
 import imgLogo from '../images/main-logo.png'
-import '../css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import '../css/vendor.css'
 import '../css/Navbar.css'
 function Navbar(){

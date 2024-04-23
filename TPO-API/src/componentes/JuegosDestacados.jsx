@@ -1,4 +1,4 @@
-import '../css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
 import '../css/vendor.css'
 
 function JuegosDestacados(){
