@@ -1,7 +1,7 @@
-import imgLogo from './images//main-logo.png'
-import './css/bootstrap.min.css'
-import './css/vendor.css'
-import './Navbar.css'
+import imgLogo from '../images/main-logo.png'
+import 'bootstrap/dist/css/bootstrap.css'
+import '../css/vendor.css'
+import '../css/Navbar.css'
 function Navbar(){
     return(
     <>
@@ -29,7 +29,7 @@ function Navbar(){
                         <a class="nav-link me-4 active" href="#billboard">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link me-4" href="#company-services">Servicio Tecnico</a>
+                        <a class="nav-link me-4" href="#company-services">Servicios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link me-4" href="#mobile-products">Juegos</a>
@@ -42,35 +42,6 @@ function Navbar(){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link me-4" href="#latest-blog">Contacto</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
-                        <ul class="dropdown-menu">
-                        <li>
-                            <a href="about.html" class="dropdown-item">About</a>
-                        </li>
-                        <li>
-                            <a href="blog.html" class="dropdown-item">Blog</a>
-                        </li>
-                        <li>
-                            <a href="shop.html" class="dropdown-item">Shop</a>
-                        </li>
-                        <li>
-                            <a href="cart.html" class="dropdown-item">Cart</a>
-                        </li>
-                        <li>
-                            <a href="checkout.html" class="dropdown-item">Checkout</a>
-                        </li>
-                        <li>
-                            <a href="single-post.html" class="dropdown-item">Single Post</a>
-                        </li>
-                        <li>
-                            <a href="single-product.html" class="dropdown-item">Single Product</a>
-                        </li>
-                        <li>
-                            <a href="contact.html" class="dropdown-item">Contact</a>
-                        </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <div class="user-items ps-5">
