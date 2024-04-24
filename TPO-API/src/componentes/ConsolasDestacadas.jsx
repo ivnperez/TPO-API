@@ -1,118 +1,82 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../css/vendor.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import '../css/vendor.css';
 
-function ConsolasDestacadas(){
-    return(
-        <>
-      <section id="smart-watches" class="product-store padding-large position-relative">
-        <div class="container">
-          <div class="row">
-            <div class="display-header d-flex justify-content-between pb-3">
-              <h2 class="display-7 text-dark text-uppercase">Smart Watches</h2>
-              <div class="btn-right">
-                <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
-              </div>
-            </div>
-            <div class="swiper product-watch-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <div class="product-card position-relative">
-                    <div class="image-holder">
-                      <img src="images/product-item6.jpg" alt="product-item" class="img-fluid"/>
+const jsonConsolasDestacadas = {
+    "productos": [
+      {
+        "nombre": "Pink watch",
+        "imagen": "/src/images/product-item6.jpg",
+        "precio": "$870"
+      },
+      {
+        "nombre": "Heavy watch",
+        "imagen": "/src/images/product-item7.jpg",
+        "precio": "$680"
+      },
+      {
+        "nombre": "Spotted watch",
+        "imagen": "/src/images/product-item8.jpg",
+        "precio": "$750"
+      },
+      {
+        "nombre": "Black watch",
+        "imagen": "/src/images/product-item9.jpg",
+        "precio": "$650"
+      },
+      {
+        "nombre": "Black watch",
+        "imagen": "/src/images/product-item10.jpg",
+        "precio": "$750"
+      }
+    ]
+};
+
+function generarSeccionDestacada(data) {
+    return (
+        <div className="swiper-wrapper">
+            {data.productos.map((producto, index) => (
+                <div className="swiper-slide" key={index}>
+                    <div className="product-card position-relative">
+                        <div className="image-holder">
+                            <img src={producto.imagen} alt={producto.nombre} className="img-fluid"/>
+                        </div>
+                        <div className="cart-concern position-absolute">
+                            <div className="cart-button d-flex">
+                                <a href="#" className="btn btn-medium btn-black">Add to Cart<svg className="cart-outline"><use xlinkHref="#cart-outline"></use></svg></a>
+                            </div>
+                        </div>
+                        <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 className="card-title text-uppercase">
+                                <a href="#">{producto.nombre}</a>
+                            </h3>
+                            <span className="item-price text-primary">{producto.precio}</span>
+                        </div>
                     </div>
-                    <div class="cart-concern position-absolute">
-                      <div class="cart-button d-flex">
-                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                      </div>
-                    </div>
-                    <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                      <h3 class="card-title text-uppercase">
-                        <a href="#">Pink watch</a>
-                      </h3>
-                      <span class="item-price text-primary">$870</span>
-                    </div>
-                  </div>
                 </div>
-                <div class="swiper-slide">
-                  <div class="product-card position-relative">
-                    <div class="image-holder">
-                      <img src="images/product-item7.jpg" alt="product-item" class="img-fluid"/>
-                    </div>
-                    <div class="cart-concern position-absolute">
-                      <div class="cart-button d-flex">
-                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                      </div>
-                    </div>
-                    <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                      <h3 class="card-title text-uppercase">
-                        <a href="#">Heavy watch</a>
-                      </h3>
-                      <span class="item-price text-primary">$680</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product-card position-relative">
-                    <div class="image-holder">
-                      <img src="images/product-item8.jpg" alt="product-item" class="img-fluid"/>
-                    </div>
-                    <div class="cart-concern position-absolute">
-                      <div class="cart-button d-flex">
-                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                      </div>
-                    </div>
-                    <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                      <h3 class="card-title text-uppercase">
-                        <a href="#">spotted watch</a>
-                      </h3>
-                      <span class="item-price text-primary">$750</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product-card position-relative">
-                    <div class="image-holder">
-                      <img src="images/product-item9.jpg" alt="product-item" class="img-fluid"/>
-                    </div>
-                    <div class="cart-concern position-absolute">
-                      <div class="cart-button d-flex">
-                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                      </div>
-                    </div>
-                    <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                      <h3 class="card-title text-uppercase">
-                        <a href="#">black watch</a>
-                      </h3>
-                      <span class="item-price text-primary">$650</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide">
-                  <div class="product-card position-relative">
-                    <div class="image-holder">
-                      <img src="images/product-item10.jpg" alt="product-item" class="img-fluid"/>
-                    </div>
-                    <div class="cart-concern position-absolute">
-                      <div class="cart-button d-flex">
-                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
-                      </div>
-                    </div>
-                    <div class="card-detail d-flex justify-content-between pt-3">
-                      <h3 class="card-title text-uppercase">
-                        <a href="#">black watch</a>
-                      </h3>
-                      <span class="item-price text-primary">$750</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            ))}
         </div>
-        <div class="swiper-pagination position-absolute text-center"></div>
-      </section>
-      </>
-    )
+    );
 }
 
-export default ConsolasDestacadas
+function ConsolasDestacadas() {
+    return (
+        <section id="smart-watches" className="product-store padding-large position-relative">
+            <div className="container">
+                <div className="row">
+                    <div className="display-header d-flex justify-content-between pb-3">
+                        <h2 className="display-7 text-dark text-uppercase">Smart Watches</h2>
+                        <div className="btn-right">
+                            <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+                        </div>
+                    </div>
+                    <div className="swiper product-watch-swiper">
+                        {generarSeccionDestacada(jsonConsolasDestacadas)}
+                    </div>
+                </div>
+            </div>
+            <div className="swiper-pagination position-absolute text-center"></div>
+        </section>
+    );
+}
+
+export default ConsolasDestacadas;

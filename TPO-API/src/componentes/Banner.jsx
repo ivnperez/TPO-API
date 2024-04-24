@@ -1,62 +1,62 @@
-import '../css/vendor.css'
-import '../css/Carrusel.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import imgBanner from '../images/banner-image.png'
+import React from 'react';
+import '../css/vendor.css';
+import '../css/Carrusel.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import imgBanner from '../images/banner-image.png';
 
-function Banner(){
-    return(
-    <>
-        <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
-            <div class="swiper main-swiper">
-                <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="container">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-md-6">
-                        <div class="banner-content">
-                            <h1 class="display-2 text-uppercase text-dark pb-5">Your Products Are Great.</h1>
-                            <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
-                        </div>
-                        </div>
-                        <div class="col-md-5">
-                        <div class="image-holder">
-                            <img src={imgBanner} alt="banner"/>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="container">
-                    <div class="row d-flex flex-wrap align-items-center">
-                        <div class="col-md-6">
-                        <div class="banner-content">
-                            <h1 class="display-2 text-uppercase text-dark pb-5">Technology Hack You Won't Get</h1>
-                            <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
-                        </div>
-                        </div>
-                        <div class="col-md-5">
-                        <div class="image-holder">
-                            <img src={imgBanner} alt="banner"/>
-                        </div>
+function Banner() {
+    return (
+        <section id="billboard" className="position-relative overflow-hidden bg-light-blue">
+            <div className="swiper main-swiper">
+                <div className="swiper-wrapper">
+                    <div className="swiper-slide">
+                        <div className="container">
+                            <div className="row d-flex align-items-center">
+                                <div className="col-md-6">
+                                    <div className="banner-content">
+                                        <h1 className="display-2 text-uppercase text-dark pb-5">Your Products Are Great.</h1>
+                                        <a href="shop.html" className="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="image-holder">
+                                        <img src={imgBanner} alt="banner"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div className="swiper-slide">
+                        <div className="container">
+                            <div className="row d-flex align-items-center">
+                                <div className="col-md-6">
+                                    <div className="banner-content">
+                                        <h1 className="display-2 text-uppercase text-dark pb-5">Technology Hack You Won't Get</h1>
+                                        <a href="shop.html" className="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="image-holder">
+                                        <img src={imgBanner} alt="banner"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
-            <div class="swiper-icon swiper-arrow swiper-arrow-prev">
-                <svg class="chevron-left">
-                <use xlink:href="#chevron-left" />
+            <div className="swiper-icon swiper-arrow swiper-arrow-prev">
+                <svg className="chevron-left">
+                    <use xlinkHref="#chevron-left" />
                 </svg>
             </div>
-            <div class="swiper-icon swiper-arrow swiper-arrow-next">
-                <svg class="chevron-right">
-                <use xlink:href="#chevron-right" />
+            <div className="swiper-icon swiper-arrow swiper-arrow-next">
+                <svg className="chevron-right">
+                    <use xlinkHref="#chevron-right" />
                 </svg>
             </div>
         </section>
-    </>
-    )
+    );
 }
-export default Banner
+
+export default Banner;
