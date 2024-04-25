@@ -3,14 +3,14 @@ import '../css/vendor.css'
 const jsonJuegosDestacados = {
     "productos": [
       {
-        "nombre": "Iphone 10",
+        "nombre": "The Witcher 3",
         "imagen": "/src/images/product-item1.jpg",
-        "precio": "$980"
+        "precio": "$25000"
       },
       {
-        "nombre": "Iphone 11",
+        "nombre": "Red dead Redemtion 2",
         "imagen": "/src/images/product-item2.jpg",
-        "precio": "$1100"
+        "precio": "$30000"
       },
       {
         "nombre": "Iphone 8",
@@ -63,7 +63,7 @@ function JuegosDestacados() {
             <div className="container">
                 <div className="row">
                     <div className="display-header d-flex justify-content-between pb-3">
-                        <h2 className="display-7 text-dark text-uppercase">Mobile Products</h2>
+                        <h2 className="display-7 text-dark text-uppercase">JUEGOS DESTACADOS</h2>
                         <div className="btn-right">
                             <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
                         </div>

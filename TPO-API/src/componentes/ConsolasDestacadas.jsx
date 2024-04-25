@@ -4,9 +4,9 @@ import '../css/vendor.css';
 const jsonConsolasDestacadas = {
     "productos": [
       {
-        "nombre": "Pink watch",
+        "nombre": "PS5",
         "imagen": "/src/images/product-item6.jpg",
-        "precio": "$870"
+        "precio": "$900000"
       },
       {
         "nombre": "Heavy watch",
@@ -64,7 +64,7 @@ function ConsolasDestacadas() {
             <div className="container">
                 <div className="row">
                     <div className="display-header d-flex justify-content-between pb-3">
-                        <h2 className="display-7 text-dark text-uppercase">Smart Watches</h2>
+                        <h2 className="display-7 text-dark text-uppercase">CONSOLAS</h2>
                         <div className="btn-right">
                             <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
                         </div>
