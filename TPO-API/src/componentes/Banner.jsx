@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/vendor.css';
 import '../css/Carrusel.css';
+import '../css/style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import imgBanner from '../images/banner-image.png';
 

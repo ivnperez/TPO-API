@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/vendor.css';
+import '../css/style.css'
 
 const jsonConsolasDestacadas = {
     "productos": [
