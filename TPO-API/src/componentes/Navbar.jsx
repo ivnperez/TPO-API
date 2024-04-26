@@ -1,8 +1,9 @@
 import imgLogo from '../images/main-logo.png'
 import 'bootstrap/dist/css/bootstrap.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch,faUser,faCartShopping} from '@fortawesome/free-solid-svg-icons'
+import { faSearch,faUser,faCartShopping,faBars} from '@fortawesome/free-solid-svg-icons'
 import '../css/vendor.css'
+import '../css/style.css'
 import '../css/Navbar.css'
 
 
@@ -16,9 +17,7 @@ function Navbar(){
                         <img src={imgLogo} className="logo"/>
                     </a>
                     <button className="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <svg className="navbar-icon">
-                            <use xlinkHref="#navbar-icon"></use>
-                        </svg>
+                        <FontAwesomeIcon icon={faBars} className="navbar-icon"/>
                     </button>
                     <div className="offcanvas offcanvas-end" tabIndex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
                         <div className="offcanvas-header px-4 pb-0">
