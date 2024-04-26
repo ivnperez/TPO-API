@@ -1,5 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import '../css/vendor.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import '../css/vendor.css';
+import '../css/style.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar,faTag,faTruck,faUserShield} from '@fortawesome/free-solid-svg-icons'
+
 
 function Servicios(){
     return(
@@ -10,9 +14,7 @@ function Servicios(){
                     <div className="col-lg-3 col-md-6 pb-3">
                         <div className="icon-box d-flex">
                             <div className="icon-box-icon pe-3 pb-3">
-                                    <svg className="cart-outline">
-                                    <use xlinkHref="#cart-outline" />
-                                    </svg>
+                                    <FontAwesomeIcon icon={faTruck} className='car-outline' />
                             </div>
                             <div className="icon-box-content">
                                 <h3 className="card-title text-uppercase text-dark">Free delivery</h3>
@@ -23,9 +25,7 @@ function Servicios(){
                     <div className="col-lg-3 col-md-6 pb-3">
                         <div className="icon-box d-flex">
                             <div className="icon-box-icon pe-3 pb-3">
-                                <svg className="quality">
-                                <use xlinkHref="#quality" />
-                                </svg>
+                                <FontAwesomeIcon icon={faStar} className='quality' />
                             </div>
                             <div className="icon-box-content">
                                 <h3 className="card-title text-uppercase text-dark">Quality guarantee</h3>
@@ -36,9 +36,7 @@ function Servicios(){
                     <div className="col-lg-3 col-md-6 pb-3">
                         <div className="icon-box d-flex">
                             <div className="icon-box-icon pe-3 pb-3">
-                                <svg className="price-tag">
-                                <use xlinkHref="#price-tag" />
-                                </svg>
+                                <FontAwesomeIcon icon={faTag} className='price-tag' />
                             </div>
                             <div className="icon-box-content">
                                 <h3 className="card-title text-uppercase text-dark">Daily offers</h3>
@@ -49,9 +47,7 @@ function Servicios(){
                     <div className="col-lg-3 col-md-6 pb-3">
                         <div className="icon-box d-flex">
                             <div className="icon-box-icon pe-3 pb-3">
-                                <svg className="shield-plus">
-                                <use xlinkHref="#shield-plus" />
-                                </svg>
+                                <FontAwesomeIcon icon={faUserShield} className='shield-plus' />
                             </div>
                             <div className="icon-box-content">
                                 <h3 className="card-title text-uppercase text-dark">100% secure payment</h3>
