@@ -6,7 +6,7 @@ function Navbar(){
     return(
     <>
         <header id="header" className="site-header header-scrolled position-fixed text-black bg-light">
-            <nav id="header-nav" className="navbar navbar-expand-lg px-3 mb-3">
+            <nav id="header-nav" className="navbar navbar-expand-lg px-3">
             <div className="container-fluid">
                 <a className="navbar-brand" href="index.html">
                 <img src={imgLogo} className="logo"/>
