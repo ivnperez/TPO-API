@@ -19,27 +19,27 @@ const jsonJuegosDestacados = {
       {
         "nombre": "The Witcher 3",
         "imagen": "/src/images/product-item1.jpg",
-        "precio": "$25000"
+        "precio": "$25.000"
       },
       {
         "nombre": "Red dead Redemtion 2",
         "imagen": "/src/images/product-item2.jpg",
-        "precio": "$30000"
+        "precio": "$30.000"
       },
       {
-        "nombre": "Iphone 8",
+        "nombre": "God of War Ragnarok",
         "imagen": "/src/images/product-item3.jpg",
-        "precio": "$780"
+        "precio": "$60.000"
       },
       {
-        "nombre": "Iphone 13",
+        "nombre": "The Legend Of Zelda Tears of the Kingdoms",
         "imagen": "/src/images/product-item4.jpg",
-        "precio": "$1500"
+        "precio": "$90.000"
       },
       {
-        "nombre": "Iphone 12",
+        "nombre": "Pokemon Legends Arceus",
         "imagen": "/src/images/product-item5.jpg",
-        "precio": "$1300"
+        "precio": "$80.000"
       }
     ]
 };

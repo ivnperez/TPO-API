@@ -16,29 +16,29 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 const jsonConsolasDestacadas = {
     "productos": [
       {
-        "nombre": "PS5",
+        "nombre": "PS5 Spiderman Edition",
         "imagen": "/src/images/product-item6.jpg",
-        "precio": "$900000"
+        "precio": "$900.000"
       },
       {
-        "nombre": "Heavy watch",
+        "nombre": "Nintendo Switch Edicion Zelda",
         "imagen": "/src/images/product-item7.jpg",
-        "precio": "$680"
+        "precio": "$580.000"
       },
       {
-        "nombre": "Spotted watch",
+        "nombre": "XBOX Series X Halo Infinite",
         "imagen": "/src/images/product-item8.jpg",
-        "precio": "$750"
+        "precio": "$90.000"
       },
       {
-        "nombre": "Black watch",
+        "nombre": "Playstation Mini",
         "imagen": "/src/images/product-item9.jpg",
-        "precio": "$650"
+        "precio": "$300.000"
       },
       {
-        "nombre": "Black watch",
+        "nombre": "Nintendo Switch Lite",
         "imagen": "/src/images/product-item10.jpg",
-        "precio": "$750"
+        "precio": "$350.000"
       }
     ]
 };
