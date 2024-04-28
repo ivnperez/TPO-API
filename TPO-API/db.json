@@ -78,20 +78,20 @@
             "plataforma": [1],
             "lanzamiento": "26 de octubre de 2018",
             "desarrollador": "Rockstar Games",
-            "destacar": false
+            "destacar": true
         },
         {
             "id": 3,
-            "nombre": "God of War",
+            "nombre": "God of War Ragnarok",
             "descripcion": "Una nueva era comienza para Kratos en esta épica aventura de acción. Abandonando la mitología griega, Kratos ahora vive en las tierras nórdicas con su hijo Atreus. Juntos, se aventuran en un viaje para cumplir los deseos de la difunta madre de Atreus y descubrir la verdad sobre su verdadero linaje.",
             "imagen": "/src/images/product-item3.jpg",
             "precio": "$60.000",
             "genero": [1, 2],
             "tipo": [1],
-            "plataforma": [1],
+            "plataforma": [4],
             "lanzamiento": "20 de abril de 2018",
             "desarrollador": "Santa Monica Studio",
-            "destacar": false
+            "destacar": true
         },
         {
             "id": 4,
@@ -156,7 +156,7 @@
             "plataforma": [4],
             "lanzamiento": "19 de septiembre de 2023",
             "desarrollador": "Warner Bros. Games",
-            "destacar": false
+            "destacar": true
         },
         {
             "id": 9,
@@ -312,7 +312,7 @@
             "plataforma": [5],
             "lanzamiento": "20 de marzo de 2020",
             "desarrollador": "Nintendo",
-            "destacar": false
+            "destacar": true
         },
         {
             "id": 21,

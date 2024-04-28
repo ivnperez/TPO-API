@@ -1,0 +1,10 @@
+.catalogo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.catalogo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+    gap: 20px; /* Espacio entre las cartas */
+}
