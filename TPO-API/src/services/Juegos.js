@@ -38,4 +38,4 @@ export const getDestacados = () => {
             console.error('Error al obtener productos:', error);
             return [];
         });
-}
+} 

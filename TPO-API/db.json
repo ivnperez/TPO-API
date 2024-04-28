@@ -15,16 +15,20 @@
         {
             "id": 4,
             "nombre": "Estrategia"
+        },
+        {
+            "id": 5,
+            "nombre": "FPS"
         }
     ],
     "tipos": [
         {
             "id": 1,
-            "nombre": "Videojuego"
+            "nombre": "Videojuegos"
         },
         {
             "id": 2,
-            "nombre": "Consola"
+            "nombre": "Consolas"
         }
     ],
     "plataformas": [
@@ -38,7 +42,7 @@
         },
         {
             "id": 3,
-            "nombre": "PC"
+            "nombre": "Xbox Series X"
         },
         {
             "id": 4,
@@ -58,20 +62,20 @@
             "precio": "$25.000",
             "genero": [3],
             "tipo": [1],
-            "plataforma": [1, 2, 3],
+            "plataforma": [1],
             "lanzamiento": "19 de mayo de 2015",
             "desarrollador": "CD Projekt RED",
-            "destacar": false
+            "destacar": true
         },
         {
             "id": 2,
             "nombre": "Red Dead Redemption 2",
             "descripcion": "Un épico cuento de vaqueros ambientado en el salvaje oeste americano. Vive la vida de un forajido en la frontera mientras persigues a miembros de tu banda, cazas animales salvajes y evitas la ley.",
             "imagen": "/src/images/product-item2.jpg",
-            "precio": "$30.000",
+            "precio": "$40.000",
             "genero": [1, 2],
             "tipo": [1],
-            "plataforma": [1, 2, 3],
+            "plataforma": [1],
             "lanzamiento": "26 de octubre de 2018",
             "desarrollador": "Rockstar Games",
             "destacar": false
@@ -82,38 +86,285 @@
             "descripcion": "Una nueva era comienza para Kratos en esta épica aventura de acción. Abandonando la mitología griega, Kratos ahora vive en las tierras nórdicas con su hijo Atreus. Juntos, se aventuran en un viaje para cumplir los deseos de la difunta madre de Atreus y descubrir la verdad sobre su verdadero linaje.",
             "imagen": "/src/images/product-item3.jpg",
             "precio": "$60.000",
-            "genero": [1],
+            "genero": [1, 2],
             "tipo": [1],
-            "plataforma": [4],
+            "plataforma": [1],
             "lanzamiento": "20 de abril de 2018",
             "desarrollador": "Santa Monica Studio",
             "destacar": false
         },
         {
             "id": 4,
-            "nombre": "The Legend of Zelda: Breath of the Wild",
-            "descripcion": "Un juego de aventuras de mundo abierto para la consola Nintendo Switch. Únete a Link en su viaje a través de la tierra de Hyrule mientras explora vastos campos, escala montañas y se enfrenta a monstruos en su búsqueda para derrotar a Ganon y salvar a la princesa Zelda.",
+            "nombre": "Marvel's Spider-Man - Game of the year Edition",
+            "descripcion": "Ponte en la piel de un curtido experimentado y maduro Peter Parker y consigue salvar Manhattan de criminales y villanos todo esto compaginándolo con su vida personal.",
             "imagen": "/src/images/product-item4.jpg",
-            "precio": "$90.000",
-            "genero": [1, 3],
+            "precio": "$50.000",
+            "genero": [1, 2],
             "tipo": [1],
-            "plataforma": [5],
-            "lanzamiento": "3 de marzo de 2017",
-            "desarrollador": "Nintendo",
-            "destacar": true
+            "plataforma": [1],
+            "lanzamiento": "28 de agosto de 2019",
+            "desarrollador": "Sony Interactive Entertainment",
+            "destacar": false
         },
         {
             "id": 5,
+            "nombre": "Horizon Forbidden West",
+            "descripcion": "Explora tierras remotas, enfréntate a máquinas más grandes e imponentes y descubre increíbles tribus en tu regreso a un futuro lejano en el mundo apocalíptico de Horizon.",
+            "imagen": "/src/images/product-item5.jpg",
+            "precio": "$70.000",
+            "genero": [1, 2],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "18 de febrero de 2022",
+            "desarrollador": "Sony Interactive Entertainment",
+            "destacar": false
+        },
+        {
+            "id": 6,
+            "nombre": "Uncharted: Legacy of Thieves Collection",
+            "descripcion": "Descubre la historia perdida y viaja por todo el mundo en busca de aventuras extraordinarias y conocimientos olvidados junto con los ladrones Nathan Drake y Chloe Frazer, dos personajes enormemente carismáticos y polifacéticos.",
+            "imagen": "/src/images/product-item6.jpg",
+            "precio": "$60.000",
+            "genero": [1, 2],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "28 de enero de 2022",
+            "desarrollador": "Sony Interactive Entertainment",
+            "destacar": false
+        },
+        {
+            "id": 7,
+            "nombre": "Marvel's Spider-Man 2",
+            "descripcion": "Los Spider-Men Peter Parker y Miles Morales regresan para una nueva y emocionante aventura de la aclamada franquicia Marvel's Spider-Man para PS5.",
+            "imagen": "/src/images/product-item7.jpg",
+            "precio": "$70.000",
+            "genero": [1, 2],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "28 de octubre de 2023",
+            "desarrollador": "Sony Interactive Entertainment",
+            "destacar": false
+        },
+        {
+            "id": 8,
+            "nombre": "Mortal Kombat 1",
+            "descripcion": "¡Mortal Kombat 1 marca el comienzo de una nueva era para la icónica franquicia, con un sistema de lucha, modos de juego y Fatalities nuevos!",
+            "imagen": "/src/images/product-item8.jpg",
+            "precio": "$80.000",
+            "genero": [2],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "19 de septiembre de 2023",
+            "desarrollador": "Warner Bros. Games",
+            "destacar": false
+        },
+        {
+            "id": 9,
+            "nombre": "The Last of Us - Part II Remastered",
+            "descripcion": "Experimenta los crecientes conflictos morales que Ellie enfrenta en su incesante búsqueda de venganza. El ciclo de violencia que la rodea cambiará tus nociones de justicia, del bien y el mal, y de quién es el héroe y el villano",
+            "imagen": "/src/images/product-item9.jpg",
+            "precio": "$80.000",
+            "genero": [1, 2],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "19 de enero de 2024",
+            "desarrollador": "Sony Interactive Entertainment",
+            "destacar": false
+        },
+        {
+            "id": 10,
+            "nombre": "Final Fantasy VII Rebirth",
+            "descripcion": "Descubre un vasto mundo brillante en esta entrega independiente dentro del proyecto del remake de Final Fantasy VII.",
+            "imagen": "/src/images/product-item10.jpg",
+            "precio": "$80.000",
+            "genero": [3],
+            "tipo": [1],
+            "plataforma": [4],
+            "lanzamiento": "29 de febrero de 2024",
+            "desarrollador": "Square Enix",
+            "destacar": false
+        },
+        {
+            "id": 11,
+            "nombre": "The Legend of Zelda: Breath of the Wild",
+            "descripcion": "Un juego de aventuras de mundo abierto para la consola Nintendo Switch. Únete a Link en su viaje a través de la tierra de Hyrule mientras explora vastos campos, escala montañas y se enfrenta a monstruos en su búsqueda para derrotar a Ganon y salvar a la princesa Zelda.",
+            "imagen": "/src/images/product-item11.jpg",
+            "precio": "$50.000",
+            "genero": [1, 2],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "23 de marzo de 2017",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 12,
             "nombre": "Pokemon Legends: Arceus",
             "descripcion": "Explora las vastas tierras de Sinnoh en este nuevo juego de la serie Pokémon. Viaja al pasado y descubre los orígenes de la Pokédex mientras te embarcas en una aventura para convertirte en el primer campeón de la región de Sinnoh.",
-            "imagen": "/src/images/product-item5.jpg",
-            "precio": "$80.000",
+            "imagen": "/src/images/product-item12.jpg",
+            "precio": "$50.000",
             "genero": [3],
             "tipo": [1],
             "plataforma": [5],
             "lanzamiento": "28 de enero de 2022",
             "desarrollador": "Game Freak",
             "destacar": false
-        }
+        },
+        {
+            "id": 13,
+            "nombre": "Super Mario RPG",
+            "descripcion": "Mario, Bowser y Peach unen fuerzas para reparar la Vía Estelar, un camino que cumple deseos, en este ameno juego de rol",
+            "imagen": "/src/images/product-item13.jpg",
+            "precio": "$70.000",
+            "genero": [3],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "17 de noviembre de 2023",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 14,
+            "nombre": "Super Mario Bros Wonder",
+            "descripcion": "¡El estilo de juego clásico de los juegos de Mario será toda una locura con la adición de la Flor Maravilla en el juego Super Mario Bros. Wonder!",
+            "imagen": "/src/images/product-item14.jpg",
+            "precio": "$70.000",
+            "genero": [1],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "20 de octubre de 2023",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 15,
+            "nombre": "The Legend of Zelda: Tears of The Kingdom",
+            "descripcion": "¡La secuela del épico Breath of the Wild para Nintendo Switch!",
+            "imagen": "/src/images/product-item15.jpg",
+            "precio": "$70.000",
+            "genero": [1.2],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "12 de mayo de 2023",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 16,
+            "nombre": "Bayonetta 3",
+            "descripcion": "Únete a Bayonetta en este juego de acción ultrafrenética, y enfréntate a una misteriosa fuerza maligna gracias a sus icónicas pistolas y un sinfín de nuevas técnicas demoniacas.",
+            "imagen": "/src/images/product-item16.jpg",
+            "precio": "$70.000",
+            "genero": [1.2],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "28 de octubre de 2022",
+            "desarrollador": "Platinum Games",
+            "destacar": false
+        },
+        {
+            "id": 17,
+            "nombre": "Pokémon Scarlet",
+            "descripcion": "Disfrutarás de una aventura con un estilo totalmente nuevo, en la que podrás explorar libremente y sin tener que seguir un orden establecido por la trama. Por supuesto, además de todos los descubrimientos y las historias esperándote, tendrás que perfeccionar tus habilidades como Entrenador o Entrenadora. Conoce a los habitantes de la región y a muchos Pokémon y adéntrate en el mundo de Pokémon como quieras.",
+            "imagen": "/src/images/product-item17.jpg",
+            "precio": "$70.000",
+            "genero": [3],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "18 de noviembre de 2022",
+            "desarrollador": "Game Freak",
+            "destacar": false
+        },
+        {
+            "id": 18,
+            "nombre": "The Legend of Zelda: Skyward Sword HD",
+            "descripcion": "Apodérate de los cielos, empuña tu espada y disfruta de la historia más antigua en la serie de The Legend of Zelda. Únete a Link en su aventura por los cielos para rescatar a Zelda, una amiga de la infancia que deberá enfrentarse a su destino. Vuela entre las islas flotantes y desciende al traicionero mundo de la superficie en esta actualizada versión en alta definición del juego The Legend of Zelda: Skyward Sword.",
+            "imagen": "/src/images/product-item18.jpg",
+            "precio": "$70.000",
+            "genero": [1.2],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "16 de julio de 2021",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 19,
+            "nombre": "Metroid Dread",
+            "descripcion": "Una vez máquinas para la investigación de extracción de ADN. Los imponentes EMMI ahora está cazando a Samus. Las tensiones son altas a medida que evades estas EMMI para evitar una muerte cruel mientras encuentras una manera de derrotarlas.",
+            "imagen": "/src/images/product-item19.jpg",
+            "precio": "$70.000",
+            "genero": [1.2],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "8 de octubre de 2021",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 20,
+            "nombre": "Animal Crossing: New Horizons",
+            "descripcion": "Si ya no puedes más con el ajetreo de la ciudad, Tom Nook se ha sacado un negocio redondo de debajo de la manga y te tiene preparada una sorpresa que te encantará: ¡el Plan de Asentamiento en Islas Desiertas de Nook Inc.!",
+            "imagen": "/src/images/product-item20.jpg",
+            "precio": "$70.000",
+            "genero": [1],
+            "tipo": [1],
+            "plataforma": [5],
+            "lanzamiento": "20 de marzo de 2020",
+            "desarrollador": "Nintendo",
+            "destacar": false
+        },
+        {
+            "id": 21,
+            "nombre": "Forza 6",
+            "descripcion": "Con este juego de Forza vas a disfrutar de horas de diversión y de nuevos desafíos que te permitirán mejorar como gamer.",
+            "imagen": "/src/images/product-item21.jpg",
+            "precio": "$30.000",
+            "genero": [2],
+            "tipo": [1],
+            "plataforma": [2],
+            "lanzamiento": "15 de septiembre de 2015",
+            "desarrollador": "Microsoft Studios",
+            "destacar": false
+        },
+        {
+            "id": 22,
+            "nombre": "Gears 5",
+            "descripcion": "Con el inminente estallido de una guerra total, Kait Díaz se separa para desvelar su vínculo con el enemigo y descubre el verdadero peligro para Sera... ella misma.",
+            "imagen": "/src/images/product-item22.jpg",
+            "precio": "$30.000",
+            "genero": [1,2],
+            "tipo": [1],
+            "plataforma": [2],
+            "lanzamiento": "10 de septiembre de 2019",
+            "desarrollador": "Microsoft Studios",
+            "destacar": false
+        },
+        {
+            "id": 23,
+            "nombre": "Playstation 5",
+            "descripcion": "Consola PlayStation 5",
+            "imagen": "/src/images/product-item23.jpg",
+            "precio": "$900.000",
+            "genero": [],
+            "tipo": [2],
+            "plataforma": [5],
+            "lanzamiento": "12 de noviembre de 2020",
+            "desarrollador": "Playstation",
+            "destacar": false
+        },
+        {
+            "id": 24,
+            "nombre": "Playstation 5 Edicion Spiderman",
+            "descripcion": "El Pack incluye 1 Consola PlayStation 5 con Lectora de Disco y 1 voucher de canje del juego Versión Digital Marvel's Spider-Man 2",
+            "imagen": "/src/images/product-item24.jpg",
+            "precio": "$900.000",
+            "genero": [],
+            "tipo": [2],
+            "plataforma": [5],
+            "lanzamiento": "12 de noviembre de 2020",
+            "desarrollador": "Playstation",
+            "destacar": false
+        }   
     ]
 }
