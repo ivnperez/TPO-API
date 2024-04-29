@@ -17,8 +17,8 @@ function Servicios(){
                                     <FontAwesomeIcon icon={faTruck} className='car-outline' />
                             </div>
                             <div className="icon-box-content">
-                                <h3 className="card-title text-uppercase text-dark">Free delivery</h3>
-                                <p>Consectetur adipi elit lorem ipsum dolor sit amet.</p>
+                                <h3 className="card-title text-uppercase text-dark">Entrega gratuita</h3>
+                                <p>Entregamos tus productos de forma gratuita en la puerta de tu hogar para tu comodidad.</p>
                             </div>
                         </div>
                     </div>
@@ -28,8 +28,8 @@ function Servicios(){
                                 <FontAwesomeIcon icon={faStar} className='quality' />
                             </div>
                             <div className="icon-box-content">
-                                <h3 className="card-title text-uppercase text-dark">Quality guarantee</h3>
-                                <p>Dolor sit amet orem ipsu mcons ectetur adipi elit.</p>
+                                <h3 className="card-title text-uppercase text-dark">Garantía de calidad</h3>
+                                <p>Nos comprometemos a ofrecerte productos de la más alta calidad para tu satisfacción total.</p>
                             </div>
                         </div>
                     </div>
@@ -39,8 +39,8 @@ function Servicios(){
                                 <FontAwesomeIcon icon={faTag} className='price-tag' />
                             </div>
                             <div className="icon-box-content">
-                                <h3 className="card-title text-uppercase text-dark">Daily offers</h3>
-                                <p>Amet consectetur adipi elit loreme ipsum dolor sit.</p>
+                                <h3 className="card-title text-uppercase text-dark">Ofertas diarias</h3>
+                                <p>Aprovecha nuestras increíbles ofertas que actualizamos diariamente para que ahorres en tus compras.</p>
                             </div>
                         </div>
                     </div>
@@ -50,8 +50,8 @@ function Servicios(){
                                 <FontAwesomeIcon icon={faUserShield} className='shield-plus' />
                             </div>
                             <div className="icon-box-content">
-                                <h3 className="card-title text-uppercase text-dark">100% secure payment</h3>
-                                <p>Rem Lopsum dolor sit amet, consectetur adipi elit.</p>
+                                <h3 className="card-title text-uppercase text-dark">Pago 100% seguro</h3>
+                                <p>Realiza tus pagos con total tranquilidad gracias a nuestro sistema de pago completamente seguro y protegido.</p>
                             </div>
                         </div>
                     </div>

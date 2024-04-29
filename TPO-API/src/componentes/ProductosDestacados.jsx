@@ -1,24 +1,36 @@
-// Importa useState y useEffect desde React
 import React, { useEffect, useState } from 'react';
-// Importa las funciones desde tu archivo Juegos.js
-import { getDestacados } from "../services/Juegos";
-// Importa Swiper y otros componentes de Swiper
+import * as ProductosServicios from "../services/Productos";
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-// Importa los estilos CSS necesarios
+
 import '../css/vendor.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/style.css';
 
-function JuegosDestacados() {
+const filtros = {
+    tipos: [1],
+    generos: [3,2],
+    plataformas: []
+};
+
+
+function ProductosDestacados() {
     const [productos, setProductos] = useState([]);
     useEffect(() => {
-        getDestacados().then(data => {
+        ProductosServicios.getProductosDestacados().then(data => {
             setProductos(data);
         })
+        //ProductosServicios.getConsolas();
+        //ProductosServicios.getJuegos();
+        //ProductosServicios.getGeneros();
+        //ProductosServicios.getPlataformasProducto();
+        //ProductosServicios.getTiposProducto();
+        //ProductosServicios.getProductoByID(1);
+        ProductosServicios.getProductosFiltros(filtros);
     }, []);
 
     const generarSeccionDestacada = () => (
@@ -79,5 +91,4 @@ function JuegosDestacados() {
         </section>
     );
 }
-
-export default JuegosDestacados;
+export default ProductosDestacados;
