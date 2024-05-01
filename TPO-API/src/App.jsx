@@ -1,9 +1,7 @@
-import { useState } from "react";
 import Navbar from "./componentes/Navbar.jsx";
 import Banner from "./componentes/Banner.jsx";
 import Servicios from "./componentes/Servicios.jsx";
-import JuegosDestacados from "./componentes/JuegosDestacados.jsx";
-import ConsolasDestacadas from "./componentes/ConsolasDestacadas.jsx";
+import ProductosDestacados from "./componentes/ProductosDestacados.jsx";
 
 function App() {
   return (
@@ -11,10 +9,9 @@ function App() {
       <Navbar />
       <Banner />
       <Servicios />
-      <JuegosDestacados />
-      <ConsolasDestacadas />
+      <ProductosDestacados />
     </>
   );
 }
-
 export default App;
+
