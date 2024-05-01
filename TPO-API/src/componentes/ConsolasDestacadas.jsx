@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../css/style.css'
 
 import React, { useContext, useRef, useState } from 'react';
+import { useCarrito } from './CarritoCompras';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';    //documentacion: https://swiperjs.com/react
 
@@ -43,7 +44,7 @@ const jsonConsolasDestacadas = {
     ]
 };
 
-function generarSeccionDestacada(data) {
+function generarSeccionDestacada(data, agregarAlCarrito) {
     return (
         <Swiper
         spaceBetween={30}
@@ -65,7 +66,7 @@ function generarSeccionDestacada(data) {
                 <img src={producto.imagen} alt={producto.nombre} />
                 <div className="cart-concern position-absolute">
                     <div className="cart-button d-flex">
-                        <a href="#" className="btn btn-medium btn-black">Agregar al carrito<svg className="cart-outline"><use xlinkHref="#cart-outline"></use></svg></a>
+                    <button className="btn btn-medium btn-black" onClick={() => agregarAlCarrito(producto)}>Agregar al carrito</button>
                     </div>
                 </div>
                 <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
@@ -82,11 +83,7 @@ function generarSeccionDestacada(data) {
 }
 
 function ConsolasDestacadas() {
-    // const { agregarAlCarrito } = useContext(CarritoContext); // Obtén la función agregarAlCarrito del contexto
-
-    // const handleAgregarAlCarrito = (producto) => {
-    //     agregarAlCarrito(producto); // Llama a la función agregarAlCarrito cuando se hace clic en el botón
-    // };
+    const { agregarAlCarrito } = useCarrito();
     return (
         <section id="mobile-products" className="product-store position-relative padding-large no-padding-top">
             <div className="container">
@@ -98,7 +95,7 @@ function ConsolasDestacadas() {
                         </div>
                     </div>
                     <div className="swiper product-swiper">
-                        {generarSeccionDestacada(jsonConsolasDestacadas)}
+                        {generarSeccionDestacada(jsonConsolasDestacadas, agregarAlCarrito)}
                     </div>
                 </div>
             </div>
