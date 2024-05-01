@@ -65,7 +65,7 @@
             "plataforma": [1],
             "lanzamiento": "19 de mayo de 2015",
             "desarrollador": "CD Projekt RED",
-            "destacar": true
+            "destacar": false
         },
         {
             "id": 2,
@@ -78,7 +78,7 @@
             "plataforma": [1],
             "lanzamiento": "26 de octubre de 2018",
             "desarrollador": "Rockstar Games",
-            "destacar": true
+            "destacar": false
         },
         {
             "id": 3,
