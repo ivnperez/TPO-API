@@ -5,6 +5,7 @@ import Servicios from "./componentes/Servicios.jsx";
 import JuegosDestacados from "./componentes/JuegosDestacados.jsx";
 import ConsolasDestacadas from "./componentes/ConsolasDestacadas.jsx";
 import Catalogo from "./componentes/Catalogo.jsx";
+import Detalle from "./componentes/DetalleProducto.jsx";
 
 function App() {
   return (

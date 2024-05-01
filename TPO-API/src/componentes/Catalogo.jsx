@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getAll } from "../services/Juegos";
 import '/src/css/Catalogo.css';
+import DetalleProducto from './DetalleProducto';
 
 function Catalogo() {
     const [productos, setProductos] = useState([]);
     const [paginaActual, setPaginaActual] = useState(1);
+    const [productoSeleccionado, setProductoSeleccionado] = useState(null);
     const productosPorPagina = 9;
 
     useEffect(() => {
@@ -24,11 +26,19 @@ function Catalogo() {
         setPaginaActual(numeroPagina);
     };
 
+    const abrirDetalleProducto = (producto) => {
+        setProductoSeleccionado(producto);
+    };
+
+    const cerrarDetalleProducto = () => {
+        setProductoSeleccionado(null);
+    };
+
     return (
         <div className="catalogo-container">
             <div className="catalogo-grid">
                 {productosPaginaActual.map(product => (
-                    <div key={product.id} className="card">
+                    <div key={product.id} className="card" onClick={() => abrirDetalleProducto(product)}>
                         <img src={product.imagen} className="card-img-top" alt="..."></img>
                         <div className="card-content">
                             <div className="card-body">
@@ -49,9 +59,10 @@ function Catalogo() {
                     ))}
                 </div>
             </div>
+            {productoSeleccionado && <DetalleProducto producto={productoSeleccionado} onClose={cerrarDetalleProducto} />}
         </div>
     );
 }
 
-
 export default Catalogo;
+
