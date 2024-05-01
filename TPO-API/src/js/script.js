@@ -30,10 +30,10 @@ new Swiper('.swiper', {
   };
 
   // now we need to assign all parameters to Swiper element
-  Object.assign(swiperEl, swiperParams);
+  //Object.assign(swiperEl, swiperParams);
 
   // and now initialize it
-  swiperEl.initialize();
+  //swiperEl.initialize();
 /*
 (function($) {
 

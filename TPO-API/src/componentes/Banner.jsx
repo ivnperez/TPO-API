@@ -24,8 +24,7 @@ function Banner() {
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
+      autoplay= {{ deelay: 1000 }}
     >
       <SwiperSlide>
         <div className="swiper-slide">
