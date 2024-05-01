@@ -1,6 +1,9 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';    //documentacion: https://swiperjs.com/react
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
+import { useCarrito } from './CarritoCompras';
+
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -44,7 +47,7 @@ const jsonJuegosDestacados = {
     ]
 };
 
-function generarSeccionDestacada(data) {
+function generarSeccionDestacada(data, agregarAlCarrito) {
     return (
         <Swiper
         spaceBetween={30}
@@ -66,7 +69,7 @@ function generarSeccionDestacada(data) {
                 <img src={producto.imagen} alt={producto.nombre} />
                 <div className="cart-concern position-absolute">
                     <div className="cart-button d-flex">
-                        <a href="#" className="btn btn-medium btn-black">Agregar al carrito<svg className="cart-outline"><use xlinkHref="#cart-outline"></use></svg></a>
+                    <button className="btn btn-medium btn-black" onClick={() => agregarAlCarrito(producto)}>Agregar al carrito</button>
                     </div>
                 </div>
                 <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
@@ -83,6 +86,7 @@ function generarSeccionDestacada(data) {
 }
 
 function JuegosDestacados() {
+    const { agregarAlCarrito } = useCarrito();
     return (
         <section id="mobile-products" className="product-store position-relative padding-large no-padding-top">
             <div className="container">
@@ -94,7 +98,7 @@ function JuegosDestacados() {
                         </div>
                     </div>
                     <div className="swiper product-swiper">
-                        {generarSeccionDestacada(jsonJuegosDestacados)}
+                        {generarSeccionDestacada(jsonJuegosDestacados, agregarAlCarrito)}
                     </div>
                 </div>
             </div>

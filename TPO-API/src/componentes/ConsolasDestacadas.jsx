@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import '../css/style.css'
 
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';    //documentacion: https://swiperjs.com/react
 
@@ -82,6 +82,11 @@ function generarSeccionDestacada(data) {
 }
 
 function ConsolasDestacadas() {
+    // const { agregarAlCarrito } = useContext(CarritoContext); // Obtén la función agregarAlCarrito del contexto
+
+    // const handleAgregarAlCarrito = (producto) => {
+    //     agregarAlCarrito(producto); // Llama a la función agregarAlCarrito cuando se hace clic en el botón
+    // };
     return (
         <section id="mobile-products" className="product-store position-relative padding-large no-padding-top">
             <div className="container">
