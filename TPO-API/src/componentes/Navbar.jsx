@@ -60,9 +60,9 @@ function Navbar(){
                                                 </a>
                                             </li>
                                         <li>
-                                                <a href="cart.html">
-                                                <FontAwesomeIcon icon={faCartShopping} className='cart' />
-                                                </a>
+                                                <button type="button" className="btn" data-bs-toggle="modal" data-bs-target="#carritoModal">
+                                                        <FontAwesomeIcon icon={faCartShopping} className='cart' />
+                                                </button>
                                         </li>
                                     </ul>
                                 </div>
