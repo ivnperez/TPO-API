@@ -11,12 +11,13 @@ import '../css/vendor.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/style.css';
 
+/*
 const filtros = {
     tipos: [1],
     generos: [3,2],
     plataformas: []
 };
-
+*/
 
 function ProductosDestacados() {
     const [productos, setProductos] = useState([]);
@@ -30,7 +31,7 @@ function ProductosDestacados() {
         //ProductosServicios.getPlataformasProducto();
         //ProductosServicios.getTiposProducto();
         //ProductosServicios.getProductoByID(1);
-        ProductosServicios.getProductosFiltros(filtros);
+        //ProductosServicios.getProductosFiltros(filtros);
     }, []);
 
     const generarSeccionDestacada = () => (
@@ -77,7 +78,7 @@ function ProductosDestacados() {
             <div className="container">
                 <div className="row">
                     <div className="display-header d-flex justify-content-between pb-3">
-                        <h2 className="display-7 text-dark text-uppercase">Juegos Destacados</h2>
+                        <h2 className="display-7 text-dark text-uppercase">Productos Destacados</h2>
                         <div className="btn-right">
                             <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Ir a la tienda</a>
                         </div>
