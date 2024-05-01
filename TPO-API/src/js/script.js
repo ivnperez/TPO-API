@@ -1,3 +1,40 @@
+new Swiper('.swiper', {
+  slidesPerView: 1,
+  grid: {
+    rows: 1,
+  },
+  mousewheel: {
+    forceToAxis: true,
+  },
+});
+
+ // swiper element
+  const swiperEl = document.querySelector('swiper-container');
+
+  // swiper parameters
+  const swiperParams = {
+    slidesPerView: 1,
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      1024: {
+        slidesPerView: 1,
+      },
+    },
+    on: {
+      init() {
+        // ...
+      },
+    },
+  };
+
+  // now we need to assign all parameters to Swiper element
+  //Object.assign(swiperEl, swiperParams);
+
+  // and now initialize it
+  //swiperEl.initialize();
+/*
 (function($) {
 
     "use strict";
@@ -55,63 +92,29 @@
 
     $(document).ready(function() {
 
-      searchPopup();
-      initProductQty();
-
-      var swiper = new Swiper(".main-swiper", {
-        speed: 500,
-        navigation: {
-          nextEl: ".swiper-arrow-prev",
-          prevEl: ".swiper-arrow-next",
-        },
-      });         
-
-      var swiper = new Swiper(".product-swiper", {
-        slidesPerView: 4,
-        spaceBetween: 10,
-        pagination: {
-          el: "#mobile-products .swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          0: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          980: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          }
-        },
-      });      
-
-      var swiper = new Swiper(".product-watch-swiper", {
-        slidesPerView: 4,
-        spaceBetween: 10,
-        pagination: {
-          el: "#smart-watches .swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          0: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          980: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          }
-        },
-      }); 
-
-      var swiper = new Swiper(".testimonial-swiper", {
+      const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        direction: 'horizontal',
         loop: true,
-        navigation: {
-          nextEl: ".swiper-arrow-prev",
-          prevEl: ".swiper-arrow-next",
+      
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
         },
-      }); 
+      
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+        // And if we need scrollbar
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
 
     }); // End of a document ready
 
 })(jQuery);
+*/

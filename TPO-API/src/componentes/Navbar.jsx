@@ -10,7 +10,7 @@ import '../css/Navbar.css'
 function Navbar(){
     return(
     <>
-        <header id="header" className="site-header header-scrolled position-fixed text-black bg-light">
+        <header id="header" className="site-header header-scrolled position-relative text-black bg-light">
             <nav id="header-nav" className="navbar navbar-expand-lg px-3 mb-3">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="index.html">
