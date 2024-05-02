@@ -16,8 +16,6 @@ function DetalleProducto({ producto, onClose }) {
                 <p>Precio: {producto && producto.precio}</p>
                 <p>Año de Lanzamiento: {producto && producto.lanzamiento}</p>
                 <p>Desarrollador: {producto && producto.desarrollador}</p>
-                <p>Plataforma: {producto && producto.plataforma}</p>
-                <p>Género: {producto && producto.genero}</p>
                 {/* Agrega más campos según sea necesario */}
             </Modal.Body>
             <Modal.Footer>

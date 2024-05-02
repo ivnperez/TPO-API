@@ -1,6 +1,6 @@
 const urlServer = "http://localhost:3000/";
 
-export const getTiposProducto = () => {
+export const getTipos = () => {
     return fetch(urlServer + `tipos`)
         .then((response) => {
             console.log('Response getTiposProducto:', response);
@@ -12,7 +12,7 @@ export const getTiposProducto = () => {
         });
 } 
 
-export const getPlataformasProducto = () => {
+export const getPlataformas = () => {
     return fetch(urlServer + `plataformas`)
         .then((response) => {
             console.log('Response getPlataformasProducto:', response);
@@ -35,7 +35,22 @@ export const getGeneros = () => {
             return data;
         });
 } 
-
+export const getFiltros = async () => {
+    try {
+        const tipos = await getTipos();
+        const plataformas = await getPlataformas();
+        const generos = await getGeneros();
+        
+        return {
+            tipos,
+            plataformas,
+            generos
+        };
+    } catch (error) {
+        console.error('Error en getFiltros:', error);
+        throw error;
+    }
+};
 /*
 const filtros = {
     tipos: [1],
