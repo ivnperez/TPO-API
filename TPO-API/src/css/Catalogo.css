@@ -1,9 +1,38 @@
 /* Catalogo.css */
 
+.filtros-column {
+    margin-right: 20px; /* Espacio de separación entre los filtros y los productos */
+}
+
+.productos-container {
+    margin-left: 20px; /* Espacio de separación entre las cards de productos y los filtros */
+}
+
 .catalogo-container {
     display: flex;
+    align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
+    justify-content: center; /* Centra horizontalmente el contenido */
+}
+
+.filtros-column {
+    margin-right: 20px; /* Espacio de separación entre los filtros y los productos */
+}
+
+.filtros-container {
+    display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.filtros-group {
+    margin-bottom: 20px; /* Espacio entre grupos de filtros */
+}
+
+.form-check {
+    margin-bottom: 10px; /* Espacio entre elementos de filtro */
+}
+
+.btn-primary {
+    margin-top: 10px; /* Espacio entre los filtros y el botón de aplicar */
 }
 
 .catalogo-grid {
@@ -77,4 +106,3 @@
 .pagination button {
     margin: 0 5px;
 }
-
