@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as ProductosServicios from "../services/Productos";
+import { useCarrito } from './CarritoCompras';
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -21,61 +23,56 @@ const filtros = {
 */
 
 function ProductosDestacados() {
-  const [productos, setProductos] = useState([]);
-  useEffect(() => {
-    ProductosServicios.getProductosDestacados().then((data) => {
-      setProductos(data);
-    });
-    //ProductosServicios.getConsolas();
-    //ProductosServicios.getJuegos();
-    //ProductosServicios.getGeneros();
-    //ProductosServicios.getPlataformasProducto();
-    //ProductosServicios.getTiposProducto();
-    //ProductosServicios.getProductoByID(1);
-    //ProductosServicios.getProductosFiltros(filtros);
-  }, []);
+    const [productos, setProductos] = useState([]);
+    const { agregarAlCarrito } = useCarrito();
+    useEffect(() => {
+        ProductosServicios.getProductosDestacados().then(data => {
+            setProductos(data);
+        })
+        //ProductosServicios.getConsolas();
+        //ProductosServicios.getJuegos();
+        //ProductosServicios.getGeneros();
+        //ProductosServicios.getPlataformasProducto();
+        //ProductosServicios.getTiposProducto();
+        //ProductosServicios.getProductoByID(1);
+        //ProductosServicios.getProductosFiltros(filtros);
+    }, []);
 
-  const generarSeccionDestacada = () => (
-    <Swiper
-      spaceBetween={30}
-      centeredSlides={true}
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      navigation={true}
-      modules={[Autoplay, Pagination, Navigation]}
-      className="mySwiper"
-    >
-      {productos?.map((producto, index) => (
-        <SwiperSlide key={index}>
-          <div className="product-card position-relative">
-            <img src={producto.imagen} alt={producto.nombre} />
-            <div className="cart-concern position-absolute">
-              <div className="cart-button d-flex">
-                <a href="#" className="btn btn-medium btn-black">
-                  Agregar al carrito
-                  <svg className="cart-outline">
-                    <use xlinkHref="#cart-outline"></use>
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
-              <h3 className="card-title text-uppercase">
-                <a href="#">{producto.nombre}</a>
-              </h3>
-              <span className="item-price text-primary">{producto.precio}</span>
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  );
-
+    const generarSeccionDestacada = () => (
+        <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+            }}
+            pagination={{
+                clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+        >
+            {productos?.map((producto, index) => (
+                <SwiperSlide key={index}>
+                    <div className="product-card position-relative">
+                        <img src={producto.imagen} alt={producto.nombre} />
+                        <div className="cart-concern position-absolute">
+                            <div className="cart-button d-flex">
+                                <button className="btn btn-medium btn-black" onClick={() => agregarAlCarrito(producto)}>Agregar al carrito</button>
+                            </div>
+                        </div>
+                        <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                            <h3 className="card-title text-uppercase">
+                                <a href="#">{producto.nombre}</a>
+                            </h3>
+                            <span className="item-price text-primary">{producto.precio}</span>
+                        </div>
+                    </div>
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    );
   // Renderizado de seccion
   return (
     <section
