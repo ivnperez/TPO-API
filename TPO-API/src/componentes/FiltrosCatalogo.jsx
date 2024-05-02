@@ -1,6 +1,13 @@
 import React from "react";
 
-function FiltrosCatalogo({ filtros, handleGeneroChange, handleTipoChange, handlePlataformaChange, aplicarFiltro }) {
+function FiltrosCatalogo({
+  filtros,
+  handleGeneroChange,
+  handleTipoChange,
+  handlePlataformaChange,
+  aplicarFiltro,
+  limpiarFiltros
+}) {
   return (
     <div className="filtros-container">
       <div className="filtros-group">
@@ -56,6 +63,9 @@ function FiltrosCatalogo({ filtros, handleGeneroChange, handleTipoChange, handle
       </div>
       <button className="btn btn-primary mt-3" onClick={aplicarFiltro}>
         Aplicar Filtro
+      </button>
+      <button className="btn btn-secondary mt-3" onClick={limpiarFiltros}>
+        Eliminar Filtros
       </button>
     </div>
   );
