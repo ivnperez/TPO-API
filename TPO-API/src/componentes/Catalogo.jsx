@@ -5,7 +5,6 @@ import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
 import { useCarrito } from './CarritoCompras';
-
 function Catalogo() {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
@@ -75,6 +74,13 @@ function Catalogo() {
     setProductosFiltrados(productosFiltradosTemp);
   };
 
+  const limpiarFiltros = () => {
+    setGenerosSeleccionados([]);
+    setTiposSeleccionados([]);
+    setPlataformasSeleccionadas([]);
+    aplicarFiltro(); // Aplicar filtro vacío para mostrar todos los productos
+  };
+
   useEffect(() => {
     getProductos()
       .then((data) => {
@@ -92,6 +98,76 @@ function Catalogo() {
         console.error("Error al obtener getFiltros:", error);
       });
   }, []);
+
+  const generarControlesFiltro = () => {
+    return (
+      <div className="filtros-container">
+        <div className="filtros-group">
+          <h4>Géneros:</h4>
+          {filtros.generos.map((genero, index) => (
+            <div key={index} className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={genero.id}
+                id={`genero-${index}`}
+                onChange={handleGeneroChange}
+              />
+              <label
+                className="form-check-label"
+                htmlFor={`genero-${index}`}
+              >
+                {genero.nombre}
+              </label>
+            </div>
+          ))}
+        </div>
+        <div className="filtros-group">
+          <h4>Tipos:</h4>
+          {filtros.tipos.map((tipo, index) => (
+            <div key={index} className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={tipo.id}
+                id={`tipo-${index}`}
+                onChange={handleTipoChange}
+              />
+              <label className="form-check-label" htmlFor={`tipo-${index}`}>
+                {tipo.nombre}
+              </label>
+            </div>
+          ))}
+        </div>
+        <div className="filtros-group">
+          <h4>Plataformas:</h4>
+          {filtros.plataformas.map((plataforma, index) => (
+            <div key={index} className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={plataforma.id}
+                id={`plataforma-${index}`}
+                onChange={handlePlataformaChange}
+              />
+              <label
+                className="form-check-label"
+                htmlFor={`plataforma-${index}`}
+              >
+                {plataforma.nombre}
+              </label>
+            </div>
+          ))}
+        </div>
+        <button className="btn btn-primary mt-3" onClick={aplicarFiltro}>
+          Aplicar Filtro
+        </button>
+        <button className="btn btn-danger mt-3" onClick={limpiarFiltros}>
+          Eliminar Filtros
+        </button>
+      </div>
+    );
+  };
 
   const abrirDetalleProducto = (producto) => {
     setProductoSeleccionado(producto);
@@ -112,15 +188,9 @@ function Catalogo() {
 
   return (
     <div className="catalogo-container">
-      <FiltrosCatalogo
-        filtros={filtros}
-        handleGeneroChange={handleGeneroChange}
-        handleTipoChange={handleTipoChange}
-        handlePlataformaChange={handlePlataformaChange}
-        aplicarFiltro={aplicarFiltro}
-      />
+      <div className="filtros-column">{generarControlesFiltro()}</div>
       <div className="productos-container">
-        <h2 className="display-7 text-dark text-uppercase"></h2>
+        <h2 className="display-7 text-dark text-uppercase">Catalogo</h2>
         <div className="catalogo-grid">
           {productosPaginaActual.map((product) => (
             <div

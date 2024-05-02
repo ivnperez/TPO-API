@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import * as ProductosServicios from "../services/Productos";
 import { useCarrito } from './CarritoCompras';
 
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import '../css/vendor.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import '../css/style.css';
+import "../css/vendor.css";
+import "bootstrap/dist/css/bootstrap.css";
+import "../css/style.css";
 
 /*
 const filtros = {
@@ -72,25 +73,34 @@ function ProductosDestacados() {
             ))}
         </Swiper>
     );
-
-    // Renderizado de seccion
-    return (
-        <section id="mobile-products" className="product-store position-relative padding-large no-padding-top">
-            <div className="container">
-                <div className="row">
-                    <div className="display-header d-flex justify-content-between pb-3">
-                        <h2 className="display-7 text-dark text-uppercase">Productos Destacados</h2>
-                        <div className="btn-right">
-                            <a href="shop.html" className="btn btn-medium btn-normal text-uppercase">Ir a la tienda</a>
-                        </div>
-                    </div>
-                    <div className="swiper product-swiper">
-                        {generarSeccionDestacada()}
-                    </div>
-                </div>
+  // Renderizado de seccion
+  return (
+    <section
+      id="mobile-products"
+      className="product-store position-relative padding-large no-padding-top"
+    >
+      <div className="container">
+        <div className="row">
+          <div className="display-header d-flex justify-content-between pb-3">
+            <h2 className="display-7 text-dark text-uppercase">
+              Productos Destacados
+            </h2>
+            <div className="btn-right">
+              <Link
+                to="/Catalogo"
+                className="btn btn-medium btn-normal text-uppercase"
+              >
+                Ir a la tienda
+              </Link>
             </div>
-            <div className="swiper-pagination position-absolute text-center"></div>
-        </section>
-    );
+          </div>
+          <div className="swiper product-swiper">
+            {generarSeccionDestacada()}
+          </div>
+        </div>
+      </div>
+      <div className="swiper-pagination position-absolute text-center"></div>
+    </section>
+  );
 }
 export default ProductosDestacados;
