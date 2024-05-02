@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as ProductosServicios from "../services/Productos";
+import { useCarrito } from './CarritoCompras';
+
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -21,6 +23,7 @@ const filtros = {
 
 function ProductosDestacados() {
     const [productos, setProductos] = useState([]);
+    const { agregarAlCarrito } = useCarrito();
     useEffect(() => {
         ProductosServicios.getProductosDestacados().then(data => {
             setProductos(data);
@@ -55,9 +58,7 @@ function ProductosDestacados() {
                         <img src={producto.imagen} alt={producto.nombre} />
                         <div className="cart-concern position-absolute">
                             <div className="cart-button d-flex">
-                                <a href="#" className="btn btn-medium btn-black">Agregar al carrito
-                                    <svg className="cart-outline"><use xlinkHref="#cart-outline"></use></svg>
-                                </a>
+                                <button className="btn btn-medium btn-black" onClick={() => agregarAlCarrito(producto)}>Agregar al carrito</button>
                             </div>
                         </div>
                         <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">

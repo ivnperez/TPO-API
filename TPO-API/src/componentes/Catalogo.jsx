@@ -4,6 +4,7 @@ import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
+import { useCarrito } from './CarritoCompras';
 
 function Catalogo() {
   const [productos, setProductos] = useState([]);
@@ -19,6 +20,7 @@ function Catalogo() {
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
   const [plataformasSeleccionadas, setPlataformasSeleccionadas] = useState([]);
+  const { agregarAlCarrito } = useCarrito();
 
   const handleGeneroChange = (event) => {
     const generoId = parseInt(event.target.value);
@@ -138,7 +140,7 @@ function Catalogo() {
                     className="btn btn-primary"
                     onClick={(e) => {
                       e.stopPropagation();
-                      // Lógica para agregar al carrito
+                      agregarAlCarrito(product);
                     }}
                   >
                     Agregar al carrito
