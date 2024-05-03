@@ -74,7 +74,7 @@ function Navbar() {
                   </li>
                   <li className="nav-item">
                     <div className="user-items ps-5">
-                      <ul className="d-flex justify-content-end list-unstyled">
+                      <ul className="d-flex justify-content-end align-items-center list-unstyled">
                         <li className="search-item pe-3">
                           <a href="#" className="search-button">
                             <FontAwesomeIcon
@@ -83,7 +83,7 @@ function Navbar() {
                             />
                           </a>
                         </li>
-                        <li className="pe-3">
+                        <li>
                           <a href="#">
                             <FontAwesomeIcon icon={faUser} className="user" />
                           </a>
