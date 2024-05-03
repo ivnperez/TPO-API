@@ -20,10 +20,7 @@ function CarritoCompras({ children }) {
 
     //Agregar un producto al carrito dentro del mismo carrito
     const incrementarCantidad = (producto) => {
-        const productoIncrementar = carrito.find(producto => producto.nombre === producto.nombre);
-        if (productoIncrementar) {
-            agregarAlCarrito({ ...productoIncrementar });
-        }
+        agregarAlCarrito({ ...producto });
     };
 
 
