@@ -190,6 +190,11 @@ function Catalogo() {
     setPaginaActual(numeroPagina);
   };
 
+  const MantenerMovimientoCarrito = (e, producto) => {
+    e.preventDefault();
+    agregarAlCarrito(producto);
+  };
+
   return (
     <div className="catalogo-container">
       <div className="filtros-column">{generarControlesFiltro()}</div>
@@ -214,7 +219,7 @@ function Catalogo() {
                     className="btn btn-primary"
                     onClick={(e) => {
                       e.stopPropagation();
-                      agregarAlCarrito(product);
+                      MantenerMovimientoCarrito(e, product);
                     }}
                   >
                     Agregar al carrito
