@@ -3,8 +3,8 @@ import { getProductos } from "../services/Productos";
 import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
+import FiltrosCatalogo from "./FiltrosCatalogo";
 import { useCarrito } from "./CarritoCompras";
-
 function Catalogo() {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);

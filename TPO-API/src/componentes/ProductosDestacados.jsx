@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as ProductosServicios from "../services/Productos";
-import { useCarrito } from './CarritoCompras';
-
+import { useCarrito } from "./CarritoCompras";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -38,23 +37,13 @@ const filtros = {
 */
 
 function ProductosDestacados() {
-    const [productos, setProductos] = useState([]);
-    const { agregarAlCarrito } = useCarrito();
-    useEffect(() => {
-        ProductosServicios.getProductosDestacados().then(data => {
-            setProductos(data);
-        })
-        //ProductosServicios.getConsolas();
-        //ProductosServicios.getJuegos();
-        //ProductosServicios.getGeneros();
-        //ProductosServicios.getPlataformasProducto();
-        //ProductosServicios.getTiposProducto();
-        //ProductosServicios.getProductoByID(1);
-        //ProductosServicios.getProductosFiltros(filtros);
-        //ProductosServicios.eliminarProducto(producto.id);
-        //ProductosServicios.agregarProducto(producto); //omitir el valor id del json o default 0
-        //ProductosServicios.modificarProducto(producto);
-    }, []);
+  const [productos, setProductos] = useState([]);
+  const { agregarAlCarrito } = useCarrito();
+  useEffect(() => {
+    ProductosServicios.getProductosDestacados().then((data) => {
+      setProductos(data);
+    });
+  }, []);
 
     const generarSeccionDestacada = () => (
         <Swiper
