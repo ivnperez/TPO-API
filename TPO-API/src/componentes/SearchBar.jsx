@@ -15,7 +15,7 @@ function SearchBar() {
         type="button"
         className="btn"
         data-bs-toggle="modal"
-        data-bs-target="#modal_search"
+        data-bs-target="#"
       >
         <FontAwesomeIcon icon={faSearch} />
       </button>
