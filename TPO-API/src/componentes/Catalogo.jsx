@@ -10,16 +10,36 @@ function Catalogo() {
   const [paginaActual, setPaginaActual] = useState(1);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const productosPorPagina = 9;
+  const { agregarAlCarrito } = useCarrito();
+
   const [filtros, setFiltros] = useState({
     generos: [],
     tipos: [],
     plataformas: [],
   });
+
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
   const [plataformasSeleccionadas, setPlataformasSeleccionadas] = useState([]);
-  const { agregarAlCarrito } = useCarrito();
+
+  useEffect(() => {
+    getProductos()
+      .then((data) => {
+        setProductos(data);
+        setProductosFiltrados(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener getProductos:", error);
+      });
+    getFiltros()
+      .then((data) => {
+        setFiltros(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener getFiltros:", error);
+      });
+  }, []);
 
   const handleGeneroChange = (event) => {
     const generoId = parseInt(event.target.value);
@@ -53,6 +73,7 @@ function Catalogo() {
   };
 
   const aplicarFiltro = () => {
+    setPaginaActual(1);
     let productosFiltradosTemp = productos.filter((producto) => {
       const filtroGeneros =
         generosSeleccionados.length === 0 ||
@@ -78,26 +99,12 @@ function Catalogo() {
     setGenerosSeleccionados([]);
     setTiposSeleccionados([]);
     setPlataformasSeleccionadas([]);
-    aplicarFiltro(); // Aplicar filtro vacío para mostrar todos los productos
+    setProductosFiltrados(productos);
+    document
+      .querySelectorAll('.form-check-input[type="checkbox"]')
+      .forEach((checkbox) => (checkbox.checked = false));
+    setPaginaActual(1);
   };
-
-  useEffect(() => {
-    getProductos()
-      .then((data) => {
-        setProductos(data);
-        setProductosFiltrados(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener getProductos:", error);
-      });
-    getFiltros()
-      .then((data) => {
-        setFiltros(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener getFiltros:", error);
-      });
-  }, []);
 
   const generarControlesFiltro = () => {
     return (
@@ -183,6 +190,11 @@ function Catalogo() {
     setPaginaActual(numeroPagina);
   };
 
+  const MantenerMovimientoCarrito = (e, producto) => {
+    e.preventDefault();
+    agregarAlCarrito(producto);
+  };
+
   return (
     <div className="catalogo-container">
       <div className="filtros-column">{generarControlesFiltro()}</div>
@@ -207,7 +219,7 @@ function Catalogo() {
                     className="btn btn-primary"
                     onClick={(e) => {
                       e.stopPropagation();
-                      agregarAlCarrito(product);
+                      MantenerMovimientoCarrito(e, product);
                     }}
                   >
                     Agregar al carrito
@@ -227,6 +239,9 @@ function Catalogo() {
               <button
                 key={numero + 1}
                 onClick={() => cambiarPagina(numero + 1)}
+                className={`btn btn-outline-primary ${
+                  numero + 1 === paginaActual ? "active" : ""
+                }`}
               >
                 {numero + 1}
               </button>
