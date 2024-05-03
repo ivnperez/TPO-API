@@ -4,7 +4,6 @@ import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
-import { useCarrito } from "./CarritoCompras";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,7 +22,6 @@ function CatalogoABM() {
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
   const [plataformasSeleccionadas, setPlataformasSeleccionadas] = useState([]);
-  const { agregarAlCarrito } = useCarrito();
 
   const handleGeneroChange = (event) => {
     const generoId = parseInt(event.target.value);
@@ -153,7 +151,6 @@ function CatalogoABM() {
                     onClick={(e) => {
                       e.stopPropagation();
                       //----------------------IMPLEMENTAR LOGICA-----------------------
-                      agregarAlCarrito(product);
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} />
