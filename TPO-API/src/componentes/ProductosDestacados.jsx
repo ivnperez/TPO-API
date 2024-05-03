@@ -22,6 +22,21 @@ const filtros = {
 };
 */
 
+/*const producto = {
+  "id": 25,
+  "nombre": "The Witcher 3: Wild Hunt MODIFICADO",
+  "descripcion": "Un juego de rol de mundo abierto desarrollado por CD Projekt RED. Únete a Geralt de Rivia en su búsqueda del niño de la profecía en un vasto mundo lleno de monstruos, magia y decisiones morales.",
+  "imagen": "/src/images/product-item1.jpg",
+  "precio": "$25.000",
+  "genero": [3],
+  "tipo": [1],
+  "plataforma": [1],
+  "lanzamiento": "19 de mayo de 2015",
+  "desarrollador": "CD Projekt RED",
+  "destacar": false
+};
+*/
+
 function ProductosDestacados() {
     const [productos, setProductos] = useState([]);
     const { agregarAlCarrito } = useCarrito();
@@ -36,6 +51,9 @@ function ProductosDestacados() {
         //ProductosServicios.getTiposProducto();
         //ProductosServicios.getProductoByID(1);
         //ProductosServicios.getProductosFiltros(filtros);
+        //ProductosServicios.eliminarProducto(producto.id);
+        //ProductosServicios.agregarProducto(producto); //omitir el valor id del json o default 0
+        //ProductosServicios.modificarProducto(producto);
     }, []);
 
     const generarSeccionDestacada = () => (
