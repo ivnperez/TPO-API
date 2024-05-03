@@ -58,7 +58,7 @@ function Navbar() {
                   className="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3"
                 >
                   <li className="nav-item">
-                    <Link to="/" className="nav-link me-4 active">
+                    <Link to="/" className="nav-link me-4 ">
                       Inicio
                     </Link>
                   </li>
@@ -68,8 +68,13 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="nav-item">
+                    <Link to="/Abm" className="nav-link me-4 ">
+                      Administracion
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <div className="user-items ps-5">
-                      <ul className="d-flex justify-content-end list-unstyled">
+                      <ul className="d-flex justify-content-end align-items-center list-unstyled">
                         <li className="search-item pe-3">
                           <a href="#" className="search-button">
                             <FontAwesomeIcon
@@ -78,7 +83,7 @@ function Navbar() {
                             />
                           </a>
                         </li>
-                        <li className="pe-3">
+                        <li>
                           <a href="#">
                             <FontAwesomeIcon icon={faUser} className="user" />
                           </a>
