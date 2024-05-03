@@ -5,7 +5,11 @@ import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
 import { useCarrito } from "./CarritoCompras";
-function Catalogo() {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+
+function CatalogoABM() {
+  //------------------Funciones--------------
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
@@ -98,70 +102,11 @@ function Catalogo() {
         console.error("Error al obtener getFiltros:", error);
       });
   }, []);
-
+  //-------------------------------ModificarLogica-------------------------------------------------
   const generarControlesFiltro = () => {
     return (
-      <div className="filtros-container">
-        <div className="filtros-group">
-          <h4>Géneros:</h4>
-          {filtros.generos.map((genero, index) => (
-            <div key={index} className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value={genero.id}
-                id={`genero-${index}`}
-                onChange={handleGeneroChange}
-              />
-              <label className="form-check-label" htmlFor={`genero-${index}`}>
-                {genero.nombre}
-              </label>
-            </div>
-          ))}
-        </div>
-        <div className="filtros-group">
-          <h4>Tipos:</h4>
-          {filtros.tipos.map((tipo, index) => (
-            <div key={index} className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value={tipo.id}
-                id={`tipo-${index}`}
-                onChange={handleTipoChange}
-              />
-              <label className="form-check-label" htmlFor={`tipo-${index}`}>
-                {tipo.nombre}
-              </label>
-            </div>
-          ))}
-        </div>
-        <div className="filtros-group">
-          <h4>Plataformas:</h4>
-          {filtros.plataformas.map((plataforma, index) => (
-            <div key={index} className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value={plataforma.id}
-                id={`plataforma-${index}`}
-                onChange={handlePlataformaChange}
-              />
-              <label
-                className="form-check-label"
-                htmlFor={`plataforma-${index}`}
-              >
-                {plataforma.nombre}
-              </label>
-            </div>
-          ))}
-        </div>
-        <button className="btn btn-primary mt-3" onClick={aplicarFiltro}>
-          Aplicar Filtro
-        </button>
-        <button className="btn btn-danger mt-3" onClick={limpiarFiltros}>
-          Eliminar Filtros
-        </button>
+      <div>
+        <button className="btn btn-success mt-3">Agregar</button>
       </div>
     );
   };
@@ -204,13 +149,17 @@ function Catalogo() {
                 <div className="card-footer">
                   <a
                     href="#"
-                    className="btn btn-primary"
+                    className="btn btn-danger"
                     onClick={(e) => {
                       e.stopPropagation();
+                      //----------------------IMPLEMENTAR LOGICA-----------------------
                       agregarAlCarrito(product);
                     }}
                   >
-                    Agregar al carrito
+                    <FontAwesomeIcon icon={faTrash} />
+                  </a>
+                  <a href="#" className="btn btn-warning">
+                    <FontAwesomeIcon icon={faPenToSquare} />
                   </a>
                 </div>
               </div>
@@ -244,4 +193,4 @@ function Catalogo() {
   );
 }
 
-export default Catalogo;
+export default CatalogoABM;

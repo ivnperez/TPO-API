@@ -1,10 +1,10 @@
 import React from "react";
-import Catalogo from "./Catalogo";
+import CatalogoABM from "./CatalogoABM";
 
 function Abm() {
   return (
     <>
-      <Catalogo />
+      <CatalogoABM />
     </>
   );
 }
