@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../css/style.css";
 import "../css/Navbar.css";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   return (
@@ -71,17 +72,20 @@ function Navbar() {
                     <div className="user-items ps-5">
                       <ul className="d-flex justify-content-end list-unstyled">
                         <li className="search-item pe-3">
-                          <a href="#" className="search-button">
-                            <FontAwesomeIcon
-                              icon={faSearch}
-                              className="search"
-                            />
-                          </a>
+                        <SearchBar></SearchBar>
                         </li>
                         <li className="pe-3">
-                          <a href="#">
-                            <FontAwesomeIcon icon={faUser} className="user" />
-                          </a>
+                        <button
+                            type="button"
+                            className="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#"
+                          >
+                            <FontAwesomeIcon
+                              icon={faUser}
+                              className="user"
+                            />
+                          </button>
                         </li>
                         <li>
                           <button

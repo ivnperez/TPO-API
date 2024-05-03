@@ -73,7 +73,7 @@ function ProductosDestacados() {
         >
             {productos?.map((producto, index) => (
                 <SwiperSlide key={index}>
-                    <div className="product-card position-relative">
+                    <div className="product-card position-relative" align="center">
                         <img src={producto.imagen} alt={producto.nombre} />
                         <div className="cart-concern position-absolute">
                             <div className="cart-button d-flex">
