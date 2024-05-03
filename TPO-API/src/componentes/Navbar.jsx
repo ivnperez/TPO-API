@@ -58,13 +58,18 @@ function Navbar() {
                   className="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3"
                 >
                   <li className="nav-item">
-                    <Link to="/" className="nav-link me-4 active">
+                    <Link to="/" className="nav-link me-4 ">
                       Inicio
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/Catalogo" className="nav-link me-4">
                       Catalogo
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/Abm" className="nav-link me-4 ">
+                      Administracion
                     </Link>
                   </li>
                   <li className="nav-item">
