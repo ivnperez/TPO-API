@@ -1,11 +1,19 @@
 import React from "react";
 
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import imgBanner from "../images/banner-image.png";
+
+import { Link } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -24,7 +32,7 @@ function Banner() {
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      autoplay= {{ deelay: 1000 }}
+      autoplay={{ deelay: 1000 }}
     >
       <SwiperSlide>
         <div className="swiper-slide">
@@ -35,12 +43,12 @@ function Banner() {
                   <h3 className="display-2 text-uppercase text-dark pb-5">
                     Productos Geniales Para Vos.
                   </h3>
-                  <a
-                    href="shop.html"
+                  <Link
+                    to="/Catalogo"
                     className="btn btn-medium btn-dark text-uppercase btn-rounded-none"
                   >
                     Ver Tienda
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="col-md-6">
@@ -53,30 +61,30 @@ function Banner() {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-      <div className="swiper-slide">
-            <div className="container">
-              <div className="row d-flex align-items-center">
-                <div className="col-md-6">
-                  <div className="banner-content">
-                    <h3 className="display-2 text-uppercase text-dark pb-5">
-                      Todos Los Hacks Tecnologicos Que Te Gustaria Tener.
-                    </h3>
-                    <a
-                      href="shop.html"
-                      className="btn btn-medium btn-dark text-uppercase btn-rounded-none"
-                    >
-                      Ver Tienda
-                    </a>
-                  </div>
+        <div className="swiper-slide">
+          <div className="container">
+            <div className="row d-flex align-items-center">
+              <div className="col-md-6">
+                <div className="banner-content">
+                  <h3 className="display-2 text-uppercase text-dark pb-5">
+                    Todos Los Hacks Tecnologicos Que Te Gustaria Tener.
+                  </h3>
+                  <Link
+                    to="/Catalogo"
+                    className="btn btn-medium btn-dark text-uppercase btn-rounded-none"
+                  >
+                    Ver Tienda
+                  </Link>
                 </div>
-                <div className="col-md-6">
-                  <div className="image-holder">
-                    <img src={imgBanner} alt="banner" />
-                  </div>
+              </div>
+              <div className="col-md-6">
+                <div className="image-holder">
+                  <img src={imgBanner} alt="banner" />
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </SwiperSlide>
     </Swiper>
   );
