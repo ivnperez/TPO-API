@@ -4,6 +4,7 @@ import CarritoCompras from "./componentes/CarritoCompras.jsx";
 import { Route, Routes } from "react-router-dom";
 import Home from "./componentes/Home.jsx";
 import Abm from "./componentes/Abm.jsx";
+import DetalleProducto from "./componentes/DetalleProducto.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Catalogo" element={<Catalogo />} />
+          <Route path="/Catalogo/:id" element={<DetalleProducto />} />
           <Route path="/Abm" element={<Abm />} />
         </Routes>
       </CarritoCompras>
