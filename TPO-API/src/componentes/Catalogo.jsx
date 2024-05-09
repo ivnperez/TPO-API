@@ -5,6 +5,7 @@ import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
 import { useCarrito } from "./CarritoCompras";
+import { Link } from "react-router-dom";
 function Catalogo() {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
@@ -205,27 +206,29 @@ function Catalogo() {
             <div
               key={product.id}
               className="card"
-              onClick={() => abrirDetalleProducto(product)}
+              //onClick={() => abrirDetalleProducto(product)}
             >
-              <img src={product.imagen} className="card-img-top" alt="..." />
-              <div className="card-content">
-                <div className="card-body">
-                  <h5 className="card-title">{product.nombre}</h5>
-                  <p className="card-text">{product.precio}</p>
+              <Link to={`/Catalogo/${product.id}`}>
+                <img src={product.imagen} className="card-img-top" alt="..." />
+                <div className="card-content">
+                  <div className="card-body">
+                    <h5 className="card-title">{product.nombre}</h5>
+                    <p className="card-text">{product.precio}</p>
+                  </div>
+                  <div className="card-footer">
+                    <a
+                      href="#"
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        MantenerMovimientoCarrito(e, product);
+                      }}
+                    >
+                      Agregar al carrito
+                    </a>
+                  </div>
                 </div>
-                <div className="card-footer">
-                  <a
-                    href="#"
-                    className="btn btn-primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      MantenerMovimientoCarrito(e, product);
-                    }}
-                  >
-                    Agregar al carrito
-                  </a>
-                </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
@@ -248,12 +251,13 @@ function Catalogo() {
             ))}
           </div>
         </div>
-        {productoSeleccionado && (
+        {/*{productoSeleccionado && (
           <DetalleProducto
             producto={productoSeleccionado}
             onClose={cerrarDetalleProducto}
           />
         )}
+        */}
       </div>
     </div>
   );

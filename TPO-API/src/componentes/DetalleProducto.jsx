@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductoByID } from "../services/Productos";
 
@@ -6,7 +6,7 @@ function DetalleProducto({}) {
   const id = useParams().id;
   const [producto, setProducto] = useState(null);
   useEffect(() => {
-    getProductoByID(id).then((data) => {
+    getProductoByID(Number(id)).then((data) => {
       setProducto(data);
     });
   }, [id]);
