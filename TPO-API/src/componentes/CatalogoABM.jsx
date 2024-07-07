@@ -26,7 +26,10 @@ function CatalogoABM() {
     precio: "",
     descripcion: "",
     anioLanzamiento: "",
-    imagen: ""
+    imagen: null, // Cambiado para manejar archivos
+    desarrollador: "",
+    tipo: "",
+    stock: 0,
   });
 
   const handleGeneroChange = (event) => {
@@ -212,17 +215,62 @@ function CatalogoABM() {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="imagen" className="form-label">
-                      URL de la imagen
+                      Cargar imagen
+                    </label>
+                    <input
+                      type="file"
+                      className="form-control"
+                      id="imagen"
+                      onChange={(e) => handleImagenChange(e)}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="desarrollador" className="form-label">
+                      Desarrollador
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="imagen"
-                      value={nuevoProducto.imagen}
+                      id="desarrollador"
+                      value={nuevoProducto.desarrollador}
                       onChange={(e) =>
                         setNuevoProducto({
                           ...nuevoProducto,
-                          imagen: e.target.value
+                          desarrollador: e.target.value
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="tipo" className="form-label">
+                      Tipo
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="tipo"
+                      value={nuevoProducto.tipo}
+                      onChange={(e) =>
+                        setNuevoProducto({
+                          ...nuevoProducto,
+                          tipo: e.target.value
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="stock" className="form-label">
+                      Stock
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="stock"
+                      value={nuevoProducto.stock}
+                      onChange={(e) =>
+                        setNuevoProducto({
+                          ...nuevoProducto,
+                          stock: parseInt(e.target.value)
                         })
                       }
                     />
@@ -245,6 +293,14 @@ function CatalogoABM() {
     );
   };
 
+  const handleImagenChange = (e) => {
+    const file = e.target.files[0];
+    setNuevoProducto({
+      ...nuevoProducto,
+      imagen: file
+    });
+  };
+
   const agregarNuevoProducto = () => {
     agregarProducto(nuevoProducto)
       .then(() => {
@@ -258,7 +314,10 @@ function CatalogoABM() {
               precio: "",
               descripcion: "",
               anioLanzamiento: "",
-              imagen: ""
+              imagen: null,
+              desarrollador: "",
+              tipo: "",
+              stock: 0,
             });
           })
           .catch((error) => {

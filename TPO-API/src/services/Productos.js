@@ -95,35 +95,52 @@ export const getConsolas = () => {
     });
 };
 
+
 //POST
-  export const agregarProducto = (producto) => {
-    return obtenerUltimoID()
-      .then((ultimoID) => {
-        producto.id = ultimoID + 1;
-        return fetch(urlServer + `productos`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(producto),
+export const agregarProducto = (producto) => {
+  const formData = new FormData();
+  formData.append("nombre", producto.nombre);
+  formData.append("descripcion", producto.descripcion);
+  formData.append("imagen", producto.imagen); // La imagen debe ser un Blob/File
+  formData.append("precio", producto.precio);
+  formData.append("descuento", producto.descuento || 0); // Default value if descuento is null
+  formData.append("lanzamiento", producto.anioLanzamiento);
+  formData.append("desarrollador", producto.desarrollador);
+  formData.append("tipo", producto.tipo);
+  formData.append("stock", producto.stock);
+
+  console.log("FormData antes de enviar:");
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
+
+  return fetch("http://localhost:8080/abm", {
+    method: "POST",
+    body: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    }
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then(error => {
+          throw new Error(error.message || "Error al agregar el producto.");
         });
-      })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al agregar el producto.");
-        }
-        console.log("Response agregarProducto:", response);
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data agregarProducto:", data);
-        return data;
-      })
-      .catch((error) => {
-        console.error("Error al agregar el producto:", error);
-        throw error;
-      });
-  };
+      }
+      console.log("Response agregarProducto:", response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Data agregarProducto:", data);
+      return data;
+    })
+    .catch((error) => {
+      console.error("Error al agregar el producto:", error);
+      throw error;
+    });
+};
+
+
   
 //DELETE
 export const eliminarProducto = (id) => {
