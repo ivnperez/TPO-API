@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { getProductos, agregarProducto, eliminarProducto } from "../services/Productos";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductos, createProducto, deleteProducto, updateProducto } from '../features/abmSlice';
 import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { Modal, Button, Form } from 'react-bootstrap';
 
 function CatalogoABM() {
-  const [productos, setProductos] = useState([]);
+  const dispatch = useDispatch();
+  const productos = useSelector(state => state.abm.items || []);
+  const status = useSelector(state => state.abm.status);
+  const error = useSelector(state => state.abm.error);
+
   const [paginaActual, setPaginaActual] = useState(1);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modoEdicion, setModoEdicion] = useState(false);
   const productosPorPagina = 9;
   const [filtros, setFiltros] = useState({
     generos: [],
@@ -20,17 +28,38 @@ function CatalogoABM() {
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
   const [plataformasSeleccionadas, setPlataformasSeleccionadas] = useState([]);
-  const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
     precio: "",
     descripcion: "",
     anioLanzamiento: "",
-    imagen: null, // Cambiado para manejar archivos
+    imagen: null,
     desarrollador: "",
     tipo: "",
     stock: 0,
   });
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchProductos());
+    }
+  }, [status, dispatch]);
+
+  useEffect(() => {
+    if (productos) {
+      setProductosFiltrados(productos);
+    }
+  }, [productos]);
+
+  useEffect(() => {
+    getFiltros()
+      .then((data) => {
+        setFiltros(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener getFiltros:", error);
+      });
+  }, []);
 
   const handleGeneroChange = (event) => {
     const generoId = parseInt(event.target.value);
@@ -93,206 +122,6 @@ function CatalogoABM() {
     aplicarFiltro(); // Aplicar filtro vacío para mostrar todos los productos
   };
 
-  useEffect(() => {
-    getProductos()
-      .then((data) => {
-        setProductos(data);
-        setProductosFiltrados(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener getProductos:", error);
-      });
-    getFiltros()
-      .then((data) => {
-        setFiltros(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener getFiltros:", error);
-      });
-  }, []);
-
-  const generarControlesFiltro = () => {
-    return (
-      <div>
-        <button
-          className="btn btn-success mt-3"
-          onClick={() => setMostrarFormulario(true)}
-        >
-          <FontAwesomeIcon icon={faPlusSquare} />
-          Agregar Producto
-        </button>
-        <div
-          className={`modal fade ${mostrarFormulario ? "show" : ""}`}
-          id="exampleModal"
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-          style={{ display: mostrarFormulario ? "block" : "none" }}
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">
-                  Agregar Producto
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => setMostrarFormulario(false)}
-                ></button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="mb-3">
-                    <label htmlFor="nombre" className="form-label">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="nombre"
-                      value={nuevoProducto.nombre}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          nombre: e.target.value
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="precio" className="form-label">
-                      Precio
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="precio"
-                      value={nuevoProducto.precio}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          precio: e.target.value
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="descripcion" className="form-label">
-                      Descripción
-                    </label>
-                    <textarea
-                      className="form-control"
-                      id="descripcion"
-                      rows="3"
-                      value={nuevoProducto.descripcion}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          descripcion: e.target.value
-                        })
-                      }
-                    ></textarea>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="anioLanzamiento" className="form-label">
-                      Año de Lanzamiento
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="anioLanzamiento"
-                      value={nuevoProducto.anioLanzamiento}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          anioLanzamiento: e.target.value
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="imagen" className="form-label">
-                      Cargar imagen
-                    </label>
-                    <input
-                      type="file"
-                      className="form-control"
-                      id="imagen"
-                      onChange={(e) => handleImagenChange(e)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="desarrollador" className="form-label">
-                      Desarrollador
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="desarrollador"
-                      value={nuevoProducto.desarrollador}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          desarrollador: e.target.value
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="tipo" className="form-label">
-                      Tipo
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="tipo"
-                      value={nuevoProducto.tipo}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          tipo: e.target.value
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="stock" className="form-label">
-                      Stock
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="stock"
-                      value={nuevoProducto.stock}
-                      onChange={(e) =>
-                        setNuevoProducto({
-                          ...nuevoProducto,
-                          stock: parseInt(e.target.value)
-                        })
-                      }
-                    />
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={agregarNuevoProducto}
-                >
-                  Confirmar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const handleImagenChange = (e) => {
     const file = e.target.files[0];
     setNuevoProducto({
@@ -301,57 +130,59 @@ function CatalogoABM() {
     });
   };
 
-  const agregarNuevoProducto = () => {
-    agregarProducto(nuevoProducto)
-      .then(() => {
-        getProductos()
-          .then((data) => {
-            setProductos(data);
-            setProductosFiltrados(aplicarFiltro());
-            setMostrarFormulario(false);
-            setNuevoProducto({
-              nombre: "",
-              precio: "",
-              descripcion: "",
-              anioLanzamiento: "",
-              imagen: null,
-              desarrollador: "",
-              tipo: "",
-              stock: 0,
-            });
-          })
-          .catch((error) => {
-            console.error("Error al obtener getProductos:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Error al agregar el producto:", error);
-      });
-  };
-
-  const abrirDetalleProducto = (producto) => {
+  const abrirModal = (modo, producto = null) => {
+    setModoEdicion(modo === 'editar');
     setProductoSeleccionado(producto);
+    setNuevoProducto(producto || {
+      nombre: "",
+      precio: "",
+      descripcion: "",
+      anioLanzamiento: "",
+      imagen: null,
+      desarrollador: "",
+      tipo: "",
+      stock: 0,
+    });
+    setShowModal(true);
   };
 
-  const cerrarDetalleProducto = () => {
-    setProductoSeleccionado(null);
+  const cerrarModal = () => {
+    setShowModal(false);
+    setProductoSeleccionado(null); // Asegurarse de que se cierre el detalle del producto
+  };
+
+  const manejarSubmit = () => {
+    if (modoEdicion) {
+      dispatch(updateProducto(nuevoProducto))
+        .then(() => {
+          dispatch(fetchProductos());
+          cerrarModal();
+        })
+        .catch((error) => {
+          console.error("Error al modificar el producto:", error);
+        });
+    } else {
+      dispatch(createProducto(nuevoProducto))
+        .then(() => {
+          dispatch(fetchProductos());
+          cerrarModal();
+        })
+        .catch((error) => {
+          console.error("Error al agregar el producto:", error);
+        });
+    }
   };
 
   const eliminarProductoSeleccionado = (id) => {
-    eliminarProducto(id)
-      .then(() => {
-        const nuevosProductos = productos.filter((producto) => producto.id !== id);
-        setProductos(nuevosProductos);
-        setProductosFiltrados(aplicarFiltro());
-      })
-      .catch((error) => {
-        console.error("Error al eliminar el producto:", error);
-      });
-  };
-
-  const modificarProductoSeleccionado = (producto) => {
-    // Implementa la lógica para abrir un formulario modal de edición de producto
-    // y utilizar la función modificarProducto para guardar los cambios
+    if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+      dispatch(deleteProducto(id))
+        .then(() => {
+          dispatch(fetchProductos());
+        })
+        .catch((error) => {
+          console.error("Error al eliminar el producto:", error);
+        });
+    }
   };
 
   const productosPaginaActual = productosFiltrados.slice(
@@ -365,7 +196,20 @@ function CatalogoABM() {
 
   return (
     <div className="catalogo-container">
-      <div className="filtros-column">{generarControlesFiltro()}</div>
+      <div className="filtros-column">
+        <button
+          className="btn btn-success mt-3"
+          onClick={() => abrirModal('agregar')}
+        >
+          <FontAwesomeIcon icon={faPlusSquare} /> Agregar Producto
+        </button>
+        <button
+          className="btn btn-secondary mt-3"
+          onClick={limpiarFiltros}
+        >
+          Limpiar Filtros
+        </button>
+      </div>
       <div className="productos-container">
         <h2 className="display-7 text-dark text-uppercase">Catalogo</h2>
         <div className="catalogo-grid">
@@ -373,9 +217,9 @@ function CatalogoABM() {
             <div
               key={product.id}
               className="card"
-              onClick={() => abrirDetalleProducto(product)}
+              onClick={() => abrirModal('ver', product)}
             >
-              <img src={product.imagen} className="card-img-top" alt="..." />
+              <img src={product.imagen} className="card-img-top" alt={product.nombre} />
               <div className="card-content">
                 <div className="card-body">
                   <h5 className="card-title">{product.nombre}</h5>
@@ -395,7 +239,7 @@ function CatalogoABM() {
                     className="btn btn-warning"
                     onClick={(e) => {
                       e.stopPropagation();
-                      modificarProductoSeleccionado(product);
+                      abrirModal('editar', product);
                     }}
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
@@ -424,12 +268,129 @@ function CatalogoABM() {
         {productoSeleccionado && (
           <DetalleProducto
             producto={productoSeleccionado}
-            onClose={cerrarDetalleProducto}
+            onClose={cerrarModal}
           />
         )}
       </div>
+      <Modal show={showModal} onHide={cerrarModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>{modoEdicion ? "Modificar Producto" : "Agregar Producto"}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formNombre">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                value={nuevoProducto.nombre}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    nombre: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formPrecio">
+              <Form.Label>Precio</Form.Label>
+              <Form.Control
+                type="text"
+                value={nuevoProducto.precio}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    precio: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formDescripcion">
+              <Form.Label>Descripción</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={nuevoProducto.descripcion}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    descripcion: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formAnioLanzamiento">
+              <Form.Label>Año de Lanzamiento</Form.Label>
+              <Form.Control
+                type="text"
+                value={nuevoProducto.anioLanzamiento}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    anioLanzamiento: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formImagen">
+              <Form.Label>Cargar imagen</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleImagenChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formDesarrollador">
+              <Form.Label>Desarrollador</Form.Label>
+              <Form.Control
+                type="text"
+                value={nuevoProducto.desarrollador}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    desarrollador: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formTipo">
+              <Form.Label>Tipo</Form.Label>
+              <Form.Control
+                type="text"
+                value={nuevoProducto.tipo}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    tipo: e.target.value
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formStock">
+              <Form.Label>Stock</Form.Label>
+              <Form.Control
+                type="number"
+                value={nuevoProducto.stock}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    stock: parseInt(e.target.value)
+                  })
+                }
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={cerrarModal}>
+            Cancelar
+          </Button>
+          <Button variant="primary" onClick={manejarSubmit}>
+            {modoEdicion ? "Modificar" : "Agregar"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
 
 export default CatalogoABM;
+

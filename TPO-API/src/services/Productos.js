@@ -1,4 +1,5 @@
-const urlServer = "http://localhost:3000/";
+const urlServer = "http://localhost:3000/";  //Esta es la URL del json
+const urlServer2 = "http://localhost:8080/"; //Esta  es la URL del back
 
 //GETs
 const obtenerUltimoID = () => {
@@ -95,8 +96,6 @@ export const getConsolas = () => {
     });
 };
 
-
-//POST
 export const agregarProducto = (producto) => {
   const formData = new FormData();
   formData.append("nombre", producto.nombre);
@@ -116,10 +115,7 @@ export const agregarProducto = (producto) => {
 
   return fetch("http://localhost:8080/abm", {
     method: "POST",
-    body: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    }
+    body: formData
   })
     .then((response) => {
       if (!response.ok) {
@@ -127,65 +123,40 @@ export const agregarProducto = (producto) => {
           throw new Error(error.message || "Error al agregar el producto.");
         });
       }
-      console.log("Response agregarProducto:", response);
       return response.json();
     })
     .then((data) => {
-      console.log("Data agregarProducto:", data);
       return data;
     })
     .catch((error) => {
-      console.error("Error al agregar el producto:", error);
       throw error;
     });
 };
 
 
-  
-//DELETE
+
+
 export const eliminarProducto = (id) => {
-  return fetch(urlServer + `productos/${id}`, {
+  return fetch(`${urlServer2}abm/${id}`, {
     method: "DELETE",
-  })
-    .then((response) => {
-      console.log("Response eliminarProducto:", response);
-      if (!response.ok) {
-        throw new Error("Error al eliminar el producto");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Data eliminarProducto:", data);
-      return data;
-    })
-    .catch((error) => {
-      console.error("Error al eliminar el producto:", error);
-      throw error;
-    });
+  }).then(response => response.json());
 };
 
-//PUT
 export const modificarProducto = (producto) => {
-  return fetch(urlServer + `productos/${producto.id}`, {
+  const formData = new FormData();
+  formData.append("nombre", producto.nombre);
+  formData.append("descripcion", producto.descripcion);
+  formData.append("imagen", producto.imagen); // La imagen debe ser un Blob/File
+  formData.append("precio", producto.precio);
+  formData.append("descuento", producto.descuento || 0); // Default value if descuento is null
+  formData.append("lanzamiento", producto.anioLanzamiento);
+  formData.append("desarrollador", producto.desarrollador);
+  formData.append("tipo", producto.tipo);
+  formData.append("stock", producto.stock);
+
+  return fetch(`${urlServer2}abm/${producto.id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(producto),
-  })
-    .then((response) => {
-      console.log("Response modificarProducto:", response);
-      if (!response.ok) {
-        throw new Error("Error al modificar el producto");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Data modificarProducto:", data);
-      return data;
-    })
-    .catch((error) => {
-      console.error("Error al modificar el producto:", error);
-      throw error;
-    });
+    body: formData
+  }).then(response => response.json());
 };
+
