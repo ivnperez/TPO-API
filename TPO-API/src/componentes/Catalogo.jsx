@@ -5,6 +5,9 @@ import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
 import { useCarrito } from "./CarritoCompras";
+import store from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+
 function Catalogo() {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
@@ -17,7 +20,7 @@ function Catalogo() {
     tipos: [],
     plataformas: [],
   });
-
+  const tokencito = useSelector(state => state.auth.user);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
@@ -27,6 +30,7 @@ function Catalogo() {
     getProductos()
       .then((data) => {
         setProductos(data);
+        console.log(tokencito);
         setProductosFiltrados(data);
       })
       .catch((error) => {

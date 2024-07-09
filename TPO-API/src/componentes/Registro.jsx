@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { register } from '../features/auth/authSlice';
 import '../css/Auth.css';
 
@@ -13,7 +14,15 @@ const Registro = () => {
     role: 'USER'
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { status, error } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      alert('Registro exitoso');
+      navigate('/');
+    }
+  }, [status, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -60,3 +69,4 @@ const Registro = () => {
 };
 
 export default Registro;
+

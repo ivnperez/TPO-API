@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../features/auth/authSlice';
-import { Link } from 'react-router-dom';
-import '../css/Auth.css'; // Importando desde la carpeta css
+import '../css/Auth.css';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -10,7 +10,15 @@ const Login = () => {
     password: ''
   });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { status, error } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (status === 'succeeded') {
+      alert('Login exitoso');
+      navigate('/');
+    }
+  }, [status, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
