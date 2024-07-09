@@ -12,6 +12,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import imgBanner from "../images/banner-image.png";
+import imgBanner2 from "../images/banner-image1.png";
 
 import { Link } from "react-router-dom";
 
@@ -79,7 +80,7 @@ function Banner() {
               </div>
               <div className="col-md-6">
                 <div className="image-holder">
-                  <img src={imgBanner} alt="banner" />
+                  <img src={imgBanner2} alt="banner" />
                 </div>
               </div>
             </div>

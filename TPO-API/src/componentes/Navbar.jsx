@@ -77,20 +77,12 @@ function Navbar() {
                     <div className="user-items ps-5">
                       <ul className="d-flex justify-content-end align-items-center list-unstyled">
                         <li className="search-item pe-3">
-                        <SearchBar></SearchBar>
+                          <SearchBar />
                         </li>
                         <li className="pe-3">
-                        <button
-                            type="button"
-                            className="btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#"
-                          >
-                            <FontAwesomeIcon
-                              icon={faUser}
-                              className="user"
-                            />
-                          </button>
+                          <Link to="/login">
+                            <FontAwesomeIcon icon={faUser} className="user" />
+                          </Link>
                         </li>
                         <li>
                           <button
@@ -99,10 +91,7 @@ function Navbar() {
                             data-bs-toggle="modal"
                             data-bs-target="#carritoModal"
                           >
-                            <FontAwesomeIcon
-                              icon={faCartShopping}
-                              className="cart"
-                            />
+                            <FontAwesomeIcon icon={faCartShopping} className="cart" />
                           </button>
                         </li>
                       </ul>
@@ -117,4 +106,5 @@ function Navbar() {
     </>
   );
 }
+
 export default Navbar;

@@ -3,6 +3,7 @@ import React, { useState, createContext, useContext } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import "../css/CarritoCompras.css";
+import { Modal, Button } from 'react-bootstrap';
 
 const CarritoContext = createContext();
 
