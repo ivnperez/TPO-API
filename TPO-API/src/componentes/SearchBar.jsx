@@ -1,43 +1,40 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, createContext, useContext } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../features/auth/authSlice';
+import { Link } from 'react-router-dom';
+import '../css/Auth.css'; // Importando desde la carpeta css
 
-function SearchBar() {
+const searchbar = () => {
+  const [form, setForm] = useState({
+    palabra: ''
+  });
+  const dispatch = useDispatch();
+  //const { status, error } = useSelector(state => state.auth);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchbar(form));
+  };
+
   return (
-    /*
-  <a href="#" className="search-button">
-    <FontAwesomeIcon icon={faSearch} className="search" />
-  </a>
-  */
-    <>
-      <button
-        type="button"
-        className="btn"
-        data-bs-toggle="modal"
-        data-bs-target="#"
-      >
-        <FontAwesomeIcon icon={faSearch} />
-      </button>
-
-      {/* aca arranca el primer modal */}
-      <div className="modal" id="modal_search" tabIndex="-1">
-            <div className="modal-dialog modal-dialog-scrollable">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div className="modal-body">
-                        
-                    </div>
-                    <div className="modal-footer">
-                       
-                    </div>
-                </div>
-            </div>
+    <div className="searchbar-form-container">
+      <form onSubmit={handleSubmit} className="search-form">
+        <div className="form-group">
+          <label>Buscar:</label>
+          <input type="text" name="search" value={form.palabra} onChange={handleChange} required />
         </div>
-    </>
+        {status === 'failed' && <p className="error-message">{error}</p>}
+      </form>
+    </div>
   );
-}
+};
 
-export default SearchBar;
+export default searchbar;
