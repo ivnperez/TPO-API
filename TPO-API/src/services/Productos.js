@@ -16,17 +16,19 @@ const obtenerUltimoID = () => {
       });
   };
   
-export const getProductos = () => {
-  return fetch(urlServer + `productos`)
-    .then((response) => {
-      console.log("Response getAll:", response);
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Data getAll:", data);
-      return data;
-    });
-};
+  export const getProductos = () => {
+    return fetch(urlServer2 + `catalogo`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener los productos.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Data getAll:", data);
+        return data.content; // Asegurándome de que se accede correctamente a la lista de productos
+      });
+  };
 
 export const getProductoByID = (id) => {
   return fetch(urlServer + `productos/${id}`)
