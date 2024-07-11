@@ -4,20 +4,23 @@ import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
-import { useCarrito } from "./CarritoCompras";
+import store from '../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { agregarProducto } from '../features/carritoSlice';
+
 function Catalogo() {
   const [productos, setProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
   const productosPorPagina = 9;
-  const { agregarAlCarrito } = useCarrito();
+  const dispatch = useDispatch();
 
   const [filtros, setFiltros] = useState({
     generos: [],
     tipos: [],
     plataformas: [],
   });
-
+  const tokencito = useSelector(state => state.auth.user);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
@@ -27,6 +30,7 @@ function Catalogo() {
     getProductos()
       .then((data) => {
         setProductos(data);
+        console.log(tokencito);
         setProductosFiltrados(data);
       })
       .catch((error) => {
@@ -192,8 +196,9 @@ function Catalogo() {
 
   const MantenerMovimientoCarrito = (e, producto) => {
     e.preventDefault();
-    agregarAlCarrito(producto);
+    dispatch(agregarProducto({ ...producto, cantidad: 1 }));
   };
+
 
   return (
     <div className="catalogo-container">
