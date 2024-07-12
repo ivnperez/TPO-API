@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Acción asincrónica para el login
+// Acci贸n asincr贸nica para el login
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
     console.log(JSON.stringify(credentials));
@@ -23,7 +23,7 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
   }
 });
 
-// Acción asincrónica para registrar usuario
+// Acci贸n asincr贸nica para registrar usuario
 export const register = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
@@ -56,7 +56,13 @@ const authSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.user = null;
+      state.status = 'idle';
+      state.error= null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -83,5 +89,5 @@ const authSlice = createSlice({
       });
   },
 });
-
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

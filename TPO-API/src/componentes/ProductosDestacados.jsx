@@ -1,88 +1,61 @@
 import React, { useEffect, useState } from "react";
-import * as ProductosServicios from "../services/Productos";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductosDestacados } from '../features/productoSlice';
 import { agregarProducto } from '../features/carritoSlice';
-
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "../css/vendor.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "../css/style.css";
 
-/*
-const filtros = {
-    tipos: [1],
-    generos: [3,2],
-    plataformas: []
-};
-*/
-
-/*const producto = {
-  "id": 25,
-  "nombre": "The Witcher 3: Wild Hunt MODIFICADO",
-  "descripcion": "Un juego de rol de mundo abierto desarrollado por CD Projekt RED. Únete a Geralt de Rivia en su búsqueda del niño de la profecía en un vasto mundo lleno de monstruos, magia y decisiones morales.",
-  "imagen": "/src/images/product-item1.jpg",
-  "precio": "$25.000",
-  "genero": [3],
-  "tipo": [1],
-  "plataforma": [1],
-  "lanzamiento": "19 de mayo de 2015",
-  "desarrollador": "CD Projekt RED",
-  "destacar": false
-};
-*/
-
 function ProductosDestacados() {
-  const [productos, setProductos] = useState([]);
   const dispatch = useDispatch();
+  const productosDestacados = useSelector(state => state.productos.destacados || []);
+  
   useEffect(() => {
-    ProductosServicios.getProductosDestacados().then((data) => {
-      setProductos(data);
-    });
-  }, []);
+    dispatch(fetchProductosDestacados());
+  }, [dispatch]);
 
-    const generarSeccionDestacada = () => (
-        <Swiper
-            spaceBetween={30}
-            centeredSlides={true}
-            autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-            }}
-            pagination={{
-                clickable: true,
-            }}
-            navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper"
-        >
-            {productos?.map((producto, index) => (
-                <SwiperSlide key={index}>
-                    <div className="product-card position-relative" align="center">
-                        <img src={producto.imagen} alt={producto.nombre} />
-                        <div className="cart-concern position-absolute">
-                            <div className="cart-button d-flex">
-                            <button className="btn btn-medium btn-black" onClick={() => dispatch(agregarProducto(producto))}>Agregar al carrito</button>
-                            </div>
-                        </div>
-                        <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                            <h3 className="card-title text-uppercase">
-                                <a href="#">{producto.nombre}</a>
-                            </h3>
-                            <span className="item-price text-primary">{producto.precio}</span>
-                        </div>
-                    </div>
-                </SwiperSlide>
-            ))}
-        </Swiper>
-    );
-  // Renderizado de seccion
+  const generarSeccionDestacada = () => (
+    <Swiper
+      spaceBetween={30}
+      centeredSlides={true}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+      pagination={{
+        clickable: true,
+      }}
+      navigation={true}
+      modules={[Autoplay, Pagination, Navigation]}
+      className="mySwiper"
+    >
+      {productosDestacados?.map((producto, index) => (
+        <SwiperSlide key={index}>
+          <div className="product-card position-relative" align="center">
+            <img src={producto.imagen} alt={producto.nombre} />
+            <div className="cart-concern position-absolute">
+              <div className="cart-button d-flex">
+                <button className="btn btn-medium btn-black" onClick={() => dispatch(agregarProducto(producto))}>Agregar al carrito</button>
+              </div>
+            </div>
+            <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
+              <h3 className="card-title text-uppercase">
+                <a href="#">{producto.nombre}</a>
+              </h3>
+              <span className="item-price text-primary">{producto.precio}</span>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+
   return (
     <section
       id="mobile-products"
@@ -112,4 +85,5 @@ function ProductosDestacados() {
     </section>
   );
 }
+
 export default ProductosDestacados;
