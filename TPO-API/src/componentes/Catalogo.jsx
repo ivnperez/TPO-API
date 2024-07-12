@@ -4,9 +4,10 @@ import { getFiltros } from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
 import FiltrosCatalogo from "./FiltrosCatalogo";
-import store from '../store';
-import { useDispatch, useSelector } from 'react-redux';
-import { agregarProducto } from '../features/carritoSlice';
+import store from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { agregarProducto } from "../features/carritoSlice";
+import { Link } from "react-router-dom";
 
 function Catalogo() {
   const [productos, setProductos] = useState([]);
@@ -16,9 +17,9 @@ function Catalogo() {
   const dispatch = useDispatch();
 
   const [filtros, setFiltros] = useState({
-    tipos: []
+    tipos: [],
   });
-  const tokencito = useSelector(state => state.auth.user);
+  const tokencito = useSelector((state) => state.auth.user);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
 
@@ -124,7 +125,6 @@ function Catalogo() {
     dispatch(agregarProducto({ ...producto, cantidad: 1 }));
   };
 
-
   return (
     <div className="catalogo-container">
       <div className="filtros-column">{generarControlesFiltro()}</div>
@@ -132,37 +132,35 @@ function Catalogo() {
         <h2 className="display-7 text-dark text-uppercase">Catalogo</h2>
         <div className="catalogo-grid">
           {productosPaginaActual.map((product) => (
-            <div
-              key={product.id}
-              className="card"
-              onClick={() => abrirDetalleProducto(product)}
-            >
-              <img src={product.imagen} className="card-img-top" alt="..." />
-              <div className="card-content">
-                <div className="card-body">
-                  <h5 className="card-title">{product.nombre}</h5>
-                  <p className="card-text">
-                    <strong>${product.precio}</strong>
-                    {product.descuento && (
-                      <span style={{ color: 'red', marginLeft: '10px' }}>
-                        -{product.descuento}%
-                      </span>
-                    )}
-                  </p>
+            <div key={product.id} className="card">
+              <Link to={`/Catalogo/${product.id}`}>
+                <img src={product.imagen} className="card-img-top" alt="..." />
+                <div className="card-content">
+                  <div className="card-body">
+                    <h5 className="card-title">{product.nombre}</h5>
+                    <p className="card-text">
+                      <strong>${product.precio}</strong>
+                      {product.descuento && (
+                        <span style={{ color: "red", marginLeft: "10px" }}>
+                          -{product.descuento}%
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <div className="card-footer">
+                    <a
+                      href="#"
+                      className="btn btn-primary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        MantenerMovimientoCarrito(e, product);
+                      }}
+                    >
+                      Agregar al carrito
+                    </a>
+                  </div>
                 </div>
-                <div className="card-footer">
-                  <a
-                    href="#"
-                    className="btn btn-primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      MantenerMovimientoCarrito(e, product);
-                    }}
-                  >
-                    Agregar al carrito
-                  </a>
-                </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
@@ -197,5 +195,3 @@ function Catalogo() {
 }
 
 export default Catalogo;
-
-
