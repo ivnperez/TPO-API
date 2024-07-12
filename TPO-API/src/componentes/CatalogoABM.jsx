@@ -145,7 +145,7 @@ function CatalogoABM() {
       tipo: "",
       stock: 0,
       descuento: 0.0,
-      flag_destacar: false // Asegúrate de que el campo sea booleano
+      flag_destacar: false
     });
     setShowModal(true);
   };
@@ -158,6 +158,7 @@ function CatalogoABM() {
   const manejarSubmit = () => {
     if (modoEdicion) {
       dispatch(updateProducto(nuevoProducto))
+        .unwrap()
         .then(() => {
           dispatch(fetchProductos());
           cerrarModal();
@@ -167,6 +168,7 @@ function CatalogoABM() {
         });
     } else {
       dispatch(createProducto(nuevoProducto))
+        .unwrap()
         .then(() => {
           dispatch(fetchProductos());
           cerrarModal();
@@ -180,6 +182,7 @@ function CatalogoABM() {
   const eliminarProductoSeleccionado = (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
       dispatch(deleteProducto(id))
+        .unwrap()
         .then(() => {
           dispatch(fetchProductos());
         })
@@ -335,13 +338,15 @@ function CatalogoABM() {
                 }
               />
             </Form.Group>
-            <Form.Group controlId="formImagen">
-              <Form.Label>Cargar imagen</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={handleImagenChange}
-              />
-            </Form.Group>
+            {!modoEdicion && (
+              <Form.Group controlId="formImagen">
+                <Form.Label>Cargar imagen</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={handleImagenChange}
+                />
+              </Form.Group>
+            )}
             <Form.Group controlId="formDesarrollador">
               <Form.Label>Desarrollador</Form.Label>
               <Form.Control
