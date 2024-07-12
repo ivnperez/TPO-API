@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getProductos } from "../services/Productos";
-import { getFiltros } from "../services/Filtros";
+import { getProductos} from "../services/Productos";
+import { getFiltros, getProductosFiltros} from "../services/Filtros";
 import "../css/Catalogo.css";
 import DetalleProducto from "./DetalleProducto";
-import FiltrosCatalogo from "./FiltrosCatalogo";
-import store from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 import { agregarProducto } from '../features/carritoSlice';
 
@@ -25,15 +23,20 @@ function Catalogo() {
   useEffect(() => {
     getProductos()
       .then((data) => {
+        console.log("Productos obtenidos:", data);
+        data.forEach(producto => {
+          console.log("Tipo del producto:", producto.tipo);
+        });
         setProductos(data);
-        console.log(tokencito);
         setProductosFiltrados(data);
       })
       .catch((error) => {
         console.error("Error al obtener getProductos:", error);
       });
+
     getFiltros()
       .then((data) => {
+        console.log("Filtros obtenidos:", data);
         setFiltros({ tipos: data.tipos });
       })
       .catch((error) => {
@@ -52,15 +55,14 @@ function Catalogo() {
 
   const aplicarFiltro = () => {
     setPaginaActual(1);
-    let productosFiltradosTemp = productos.filter((producto) => {
-      const filtroTipos =
-        tiposSeleccionados.length === 0 ||
-        tiposSeleccionados.some((tipo) => producto.tipo.includes(tipo));
-
-      return filtroTipos;
-    });
-
-    setProductosFiltrados(productosFiltradosTemp);
+    getProductosFiltros({ tipos: tiposSeleccionados })
+      .then((productosFiltradosTemp) => {
+        console.log("Productos filtrados:", productosFiltradosTemp);
+        setProductosFiltrados(productosFiltradosTemp);
+      })
+      .catch((error) => {
+        console.error("Error al aplicar filtro:", error);
+      });
   };
 
   const limpiarFiltros = () => {
@@ -123,7 +125,6 @@ function Catalogo() {
     e.preventDefault();
     dispatch(agregarProducto({ ...producto, cantidad: 1 }));
   };
-
 
   return (
     <div className="catalogo-container">
@@ -197,5 +198,4 @@ function Catalogo() {
 }
 
 export default Catalogo;
-
 
