@@ -88,9 +88,6 @@ const Navbar = () => {
                 <li className="nav-item">
                   <div className="user-items ps-5">
                     <ul className="d-flex justify-content-end align-items-center list-unstyled">
-                      <li className="search-item pe-3">
-                        <SearchBar />
-                      </li>
                       <li className="pe-3">
                         {user ? (
                           <button onClick={handleLogout} className="btn">

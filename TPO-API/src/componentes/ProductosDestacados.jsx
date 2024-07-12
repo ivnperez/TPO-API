@@ -41,7 +41,7 @@ function ProductosDestacados() {
             <img src={producto.imagen} alt={producto.nombre} />
             <div className="cart-concern position-absolute">
               <div className="cart-button d-flex">
-                <button className="btn btn-medium btn-black" onClick={() => dispatch(agregarProducto(producto))}>Agregar al carrito</button>
+              <button className="btn btn-medium btn-black" onClick={() => dispatch(agregarProducto({ ...producto, cantidad: 1 }))}>Agregar al carrito</button>
               </div>
             </div>
             <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">

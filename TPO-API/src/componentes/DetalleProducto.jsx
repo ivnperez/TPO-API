@@ -41,7 +41,7 @@ function DetalleProducto() {
           <p>Desarrollador: {producto && producto.desarrollador}</p>
           <button
             className="btn btn-medium btn-black"
-            onClick={() => dispatch(agregarProducto(producto))}
+            onClick={() => dispatch(agregarProducto({ ...producto, cantidad: 1 }))}
           >
             Agregar al carrito
           </button>

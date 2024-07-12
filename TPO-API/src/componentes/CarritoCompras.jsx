@@ -194,14 +194,16 @@ function CarritoCompras({ children }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseCheckoutModal}></button>
                         </div>
                         <div className="modal-body">
-                            <hr className="my-4" />
                             <div className='mb-3'>
                                 <p className="texto-negro">Productos</p>
                             </div>
                             {productosCarrito.map((producto, index) => (
-                                <div key={index} className="flex-grow-1" style={{ marginRight: '10px' }}>
+                                <div key={index} className="d-flex align-items-center">
+                                <img src={producto.imagen} alt={producto.nombre} className="img-thumbnail mr-3" style={{ width: "100px", marginRight: "10px" }} />
+                                <div className="flex-grow-1" style={{ marginRight: '10px' }}>
                                     <p className="mb-0 texto-negro">{producto.nombre} (X{producto.cantidad})</p>
                                     <p className="mb-0 texto-negro">${producto.precio}</p>
+                    </div>
                                 </div>
                             ))}
                         </div>

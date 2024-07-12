@@ -210,12 +210,6 @@ function CatalogoABM() {
         >
           <FontAwesomeIcon icon={faPlusSquare} /> Agregar Producto
         </button>
-        <button
-          className="btn btn-secondary mt-3"
-          onClick={limpiarFiltros}
-        >
-          Limpiar Filtros
-        </button>
       </div>
       <div className="productos-container">
         <h2 className="display-7 text-dark text-uppercase">Catalogo</h2>

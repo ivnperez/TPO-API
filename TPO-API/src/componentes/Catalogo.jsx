@@ -142,7 +142,7 @@ function Catalogo() {
                     <h5 className="card-title">{product.nombre}</h5>
                     <p className="card-text">
                       <strong>${product.precio}</strong>
-                      {product.descuento && (
+                      {product.descuento > 0 && (
                         <span style={{ color: "red", marginLeft: "10px" }}>
                           -{product.descuento}%
                         </span>
