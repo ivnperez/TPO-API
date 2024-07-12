@@ -1,40 +1,35 @@
-const urlServer = "http://localhost:3000/";
+const urlServer2 = "http://localhost:8080/"; // URL del backend
 
 export const getTipos = () => {
-    return fetch(urlServer + `tipos`)
-        .then((response) => {
-            console.log('Response getTiposProducto:', response);
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Data getTiposProducto:', data);
-            return data;
+    return fetch(urlServer2 + `catalogo/tipo`)
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+            console.error('Error en getTipos:', error);
+            return [];
         });
-} 
+};
 
 export const getPlataformas = () => {
-    return fetch(urlServer + `plataformas`)
-        .then((response) => {
-            console.log('Response getPlataformasProducto:', response);
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Data getPlataformasProducto:', data);
-            return data;
+    return fetch(urlServer2 + `catalogo/plataformas`)
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+            console.error('Error en getPlataformas:', error);
+            return [];
         });
-} 
+};
 
 export const getGeneros = () => {
-    return fetch(urlServer + `generos`)
-        .then((response) => {
-            console.log('Response getGeneros:', response);
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Data getGeneros:', data);
-            return data;
+    return fetch(urlServer2 + `catalogo/generos`)
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+            console.error('Error en getGeneros:', error);
+            return [];
         });
-} 
+};
+
 export const getFiltros = async () => {
     try {
         const tipos = await getTipos();
@@ -51,40 +46,18 @@ export const getFiltros = async () => {
         throw error;
     }
 };
-/*
-const filtros = {
-    tipos: [1],
-    generos: [3,2],
-    plataformas: []
-};
-*/
+
 export const getProductosFiltros = (filtroProductos) => {
-    return fetch(urlServer + `productos/`)
-        .then((response) => {
-            console.log('Response getProductosFiltros:', response);
-            return response.json();
-        })
-        .then((data) => {
-            
-            let items = [...data];
-            
-            if (filtroProductos.tipos.length > 0) {
-                items = items.filter(producto => producto.tipo.some(tipo => filtroProductos.tipos.includes(tipo)));
-            }
-            
-            if (filtroProductos.generos.length > 0) {
-                items = items.filter(producto => producto.genero.some(genero => filtroProductos.generos.includes(genero)));
-            }
-            
-            if (filtroProductos.plataformas.length > 0) {
-                items = items.filter(producto => producto.plataforma.some(plataforma => filtroProductos.plataformas.includes(plataforma)));
-            }
-            console.log('Data getProductosFiltros:', items);
-            return items;
-        })
+    let url = urlServer2 + `catalogo/filtro`;
+    if (filtroProductos.tipos.length > 0) {
+        url += `?tipoId=${filtroProductos.tipos[0]}`; // Suponiendo que solo se filtra por un tipo a la vez
+    }
+
+    return fetch(url)
+        .then((response) => response.json())
+        .then((data) => data)
         .catch((error) => {
             console.error('Error en getProductosFiltros:', error);
             return [];
         });
-}
-
+};

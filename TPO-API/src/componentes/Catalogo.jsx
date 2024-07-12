@@ -16,15 +16,11 @@ function Catalogo() {
   const dispatch = useDispatch();
 
   const [filtros, setFiltros] = useState({
-    generos: [],
-    tipos: [],
-    plataformas: [],
+    tipos: []
   });
   const tokencito = useSelector(state => state.auth.user);
   const [productosFiltrados, setProductosFiltrados] = useState([]);
-  const [generosSeleccionados, setGenerosSeleccionados] = useState([]);
   const [tiposSeleccionados, setTiposSeleccionados] = useState([]);
-  const [plataformasSeleccionadas, setPlataformasSeleccionadas] = useState([]);
 
   useEffect(() => {
     getProductos()
@@ -38,23 +34,12 @@ function Catalogo() {
       });
     getFiltros()
       .then((data) => {
-        setFiltros(data);
+        setFiltros({ tipos: data.tipos });
       })
       .catch((error) => {
         console.error("Error al obtener getFiltros:", error);
       });
   }, []);
-
-  const handleGeneroChange = (event) => {
-    const generoId = parseInt(event.target.value);
-    if (event.target.checked) {
-      setGenerosSeleccionados([...generosSeleccionados, generoId]);
-    } else {
-      setGenerosSeleccionados(
-        generosSeleccionados.filter((id) => id !== generoId)
-      );
-    }
-  };
 
   const handleTipoChange = (event) => {
     const tipoId = parseInt(event.target.value);
@@ -65,44 +50,21 @@ function Catalogo() {
     }
   };
 
-  const handlePlataformaChange = (event) => {
-    const plataformaId = parseInt(event.target.value);
-    if (event.target.checked) {
-      setPlataformasSeleccionadas([...plataformasSeleccionadas, plataformaId]);
-    } else {
-      setPlataformasSeleccionadas(
-        plataformasSeleccionadas.filter((id) => id !== plataformaId)
-      );
-    }
-  };
-
   const aplicarFiltro = () => {
     setPaginaActual(1);
     let productosFiltradosTemp = productos.filter((producto) => {
-      const filtroGeneros =
-        generosSeleccionados.length === 0 ||
-        generosSeleccionados.some((gen) => producto.genero.includes(gen));
-
       const filtroTipos =
         tiposSeleccionados.length === 0 ||
         tiposSeleccionados.some((tipo) => producto.tipo.includes(tipo));
 
-      const filtroPlataformas =
-        plataformasSeleccionadas.length === 0 ||
-        plataformasSeleccionadas.some((plataforma) =>
-          producto.plataforma.includes(plataforma)
-        );
-
-      return filtroGeneros && filtroTipos && filtroPlataformas;
+      return filtroTipos;
     });
 
     setProductosFiltrados(productosFiltradosTemp);
   };
 
   const limpiarFiltros = () => {
-    setGenerosSeleccionados([]);
     setTiposSeleccionados([]);
-    setPlataformasSeleccionadas([]);
     setProductosFiltrados(productos);
     document
       .querySelectorAll('.form-check-input[type="checkbox"]')
@@ -113,23 +75,6 @@ function Catalogo() {
   const generarControlesFiltro = () => {
     return (
       <div className="filtros-container">
-        <div className="filtros-group">
-          <h4>Géneros:</h4>
-          {filtros.generos.map((genero, index) => (
-            <div key={index} className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value={genero.id}
-                id={`genero-${index}`}
-                onChange={handleGeneroChange}
-              />
-              <label className="form-check-label" htmlFor={`genero-${index}`}>
-                {genero.nombre}
-              </label>
-            </div>
-          ))}
-        </div>
         <div className="filtros-group">
           <h4>Tipos:</h4>
           {filtros.tipos.map((tipo, index) => (
@@ -143,26 +88,6 @@ function Catalogo() {
               />
               <label className="form-check-label" htmlFor={`tipo-${index}`}>
                 {tipo.nombre}
-              </label>
-            </div>
-          ))}
-        </div>
-        <div className="filtros-group">
-          <h4>Plataformas:</h4>
-          {filtros.plataformas.map((plataforma, index) => (
-            <div key={index} className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value={plataforma.id}
-                id={`plataforma-${index}`}
-                onChange={handlePlataformaChange}
-              />
-              <label
-                className="form-check-label"
-                htmlFor={`plataforma-${index}`}
-              >
-                {plataforma.nombre}
               </label>
             </div>
           ))}
@@ -216,7 +141,14 @@ function Catalogo() {
               <div className="card-content">
                 <div className="card-body">
                   <h5 className="card-title">{product.nombre}</h5>
-                  <p className="card-text">{product.precio}</p>
+                  <p className="card-text">
+                    <strong>${product.precio}</strong>
+                    {product.descuento && (
+                      <span style={{ color: 'red', marginLeft: '10px' }}>
+                        -{product.descuento}%
+                      </span>
+                    )}
+                  </p>
                 </div>
                 <div className="card-footer">
                   <a
@@ -265,3 +197,5 @@ function Catalogo() {
 }
 
 export default Catalogo;
+
+
