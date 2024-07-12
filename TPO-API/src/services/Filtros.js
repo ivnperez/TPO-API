@@ -10,36 +10,11 @@ export const getTipos = () => {
         });
 };
 
-export const getPlataformas = () => {
-    return fetch(urlServer2 + `catalogo/plataformas`)
-        .then((response) => response.json())
-        .then((data) => data)
-        .catch((error) => {
-            console.error('Error en getPlataformas:', error);
-            return [];
-        });
-};
-
-export const getGeneros = () => {
-    return fetch(urlServer2 + `catalogo/generos`)
-        .then((response) => response.json())
-        .then((data) => data)
-        .catch((error) => {
-            console.error('Error en getGeneros:', error);
-            return [];
-        });
-};
-
 export const getFiltros = async () => {
     try {
         const tipos = await getTipos();
-        const plataformas = await getPlataformas();
-        const generos = await getGeneros();
-        
         return {
-            tipos,
-            plataformas,
-            generos
+            tipos
         };
     } catch (error) {
         console.error('Error en getFiltros:', error);
@@ -55,7 +30,10 @@ export const getProductosFiltros = (filtroProductos) => {
 
     return fetch(url)
         .then((response) => response.json())
-        .then((data) => data)
+        .then((data) => {
+            console.log("Productos filtrados obtenidos:", data);
+            return data;
+        })
         .catch((error) => {
             console.error('Error en getProductosFiltros:', error);
             return [];

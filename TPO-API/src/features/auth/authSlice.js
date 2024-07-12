@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Acci贸n asincr贸nica para el login
+// Acción asincrónica para el login
 export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
-    console.log(JSON.stringify(credentials));
     const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -16,14 +15,19 @@ export const login = createAsyncThunk('auth/login', async (credentials, { reject
     }
 
     const data = await response.json();
-    console.log(data);
+    console.log('Response data:', data); // Log para verificar la respuesta completa
+    console.log('Token:', data.access_token); // Cambiar a data.access_token
+    localStorage.setItem('accessToken', data.access_token); // Guardar el token con el nombre correcto
     return data;
   } catch (error) {
     return rejectWithValue(error.message);
   }
 });
 
-// Acci贸n asincr贸nica para registrar usuario
+
+
+
+// Acción asincrónica para registrar usuario
 export const register = createAsyncThunk(
   'auth/register',
   async (userData, { rejectWithValue }) => {
@@ -42,6 +46,7 @@ export const register = createAsyncThunk(
       }
 
       const data = await response.json();
+      localStorage.setItem('accessToken', data.token); // Guardar el token en localStorage
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -60,7 +65,8 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.status = 'idle';
-      state.error= null;
+      state.error = null;
+      localStorage.removeItem('accessToken'); // Eliminar el token del localStorage al hacer logout
     }
   },
   extraReducers: (builder) => {
@@ -89,5 +95,6 @@ const authSlice = createSlice({
       });
   },
 });
+
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
