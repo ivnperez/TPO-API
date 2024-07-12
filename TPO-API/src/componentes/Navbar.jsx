@@ -2,23 +2,18 @@ import { Link } from "react-router-dom";
 import imgLogo from "../images/main-logo.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSearch,
-  faUser,
-  faCartShopping,
-  faBars,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUser, faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons";
 import "../css/style.css";
 import "../css/Navbar.css";
 import SearchBar from "./SearchBar";
+import { useSelector } from 'react-redux';
 
 function Navbar() {
+  const usuario = useSelector(state => state.auth.user);
+
   return (
     <>
-      <header
-        id="header"
-        className="site-header header-scrolled position-relative text-black bg-light"
-      >
+      <header id="header" className="site-header header-scrolled position-relative text-black bg-light">
         <nav id="header-nav" className="navbar navbar-expand-lg px-3 mb-3">
           <div className="container-fluid">
             <Link to="/" className="navbar-brand">
@@ -35,12 +30,7 @@ function Navbar() {
             >
               <FontAwesomeIcon icon={faBars} className="navbar-icon" />
             </button>
-            <div
-              className="offcanvas offcanvas-end"
-              tabIndex="-1"
-              id="bdNavbar"
-              aria-labelledby="bdNavbarOffcanvasLabel"
-            >
+            <div className="offcanvas offcanvas-end" tabIndex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
               <div className="offcanvas-header px-4 pb-0">
                 <Link to="/" className="navbar-brand">
                   <img src={imgLogo} className="logo" />
@@ -54,25 +44,18 @@ function Navbar() {
                 ></button>
               </div>
               <div className="offcanvas-body">
-                <ul
-                  id="navbar"
-                  className="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3"
-                >
+                <ul id="navbar" className="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                   <li className="nav-item">
-                    <Link to="/" className="nav-link me-4 ">
-                      Inicio
-                    </Link>
+                    <Link to="/" className="nav-link me-4">Inicio</Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/Catalogo" className="nav-link me-4">
-                      Catalogo
-                    </Link>
+                    <Link to="/Catalogo" className="nav-link me-4">Catalogo</Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/Abm" className="nav-link me-4 ">
-                      Administracion
-                    </Link>
-                  </li>
+                  {usuario && usuario.rol === 'ADMIN' && (
+                    <li className="nav-item">
+                      <Link to="/Abm" className="nav-link me-4">Administracion</Link>
+                    </li>
+                  )}
                   <li className="nav-item">
                     <div className="user-items ps-5">
                       <ul className="d-flex justify-content-end align-items-center list-unstyled">
