@@ -1,13 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Acción asincrónica para la busquda
-export const buscar = createAsyncThunk('auth/login', async (busqueda, { rejectWithValue }) => {
+// Filtrar el listado de productos
+export const filtroProductos (){
+  return(
+    <>
+    console.log("probando");
+    </>
+  );
+}
+
+
+
+// Acción asincrónica para el login
+export const login = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
   try {
-    console.log(JSON.stringify(busqueda));
-    const response = await fetch('http://localhost:8080/api/v1/product/search', {
+    console.log(JSON.stringify(credentials));
+    const response = await fetch('http://localhost:8080/api/v1/auth/authenticate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(busqueda),
+      body: JSON.stringify(credentials),
     });
 
     if (!response.ok) {
@@ -22,6 +33,8 @@ export const buscar = createAsyncThunk('auth/login', async (busqueda, { rejectWi
     return rejectWithValue(error.message);
   }
 });
+
+
 
 const authSlice = createSlice({
   name: 'auth',
