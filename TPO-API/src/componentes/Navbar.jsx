@@ -78,11 +78,13 @@ const Navbar = () => {
                     Catalogo
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/Abm" className="nav-link me-4">
-                    Administracion
-                  </Link>
-                </li>
+                {user && user.rol === "ADMIN" && (
+                  <li className="nav-item">
+                    <Link to="/Abm" className="nav-link me-4">
+                      Administracion
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <div className="user-items ps-5">
                     <ul className="d-flex justify-content-end align-items-center list-unstyled">
