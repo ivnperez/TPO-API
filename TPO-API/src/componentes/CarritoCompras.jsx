@@ -19,6 +19,12 @@ function CarritoCompras({ children }) {
         return total + (precio * producto.cantidad);
     }, 0);
 
+    const precioTotalConDescuento = productosCarrito.reduce((total, producto) => {
+        const precioDescuentoString = producto.precioDescuento.toString().replace(/[^\d]+/g, ''); // Conversión a cadena antes de usar replace
+        const precioDescuento = parseFloat(precioDescuentoString);
+        return total + (precioDescuento * producto.cantidad);
+    }, 0);
+
     const handleAgregarUnidad = (producto) => {
         dispatch(agregarProducto({ ...producto, cantidad: 1 }));
     };
@@ -56,7 +62,7 @@ function CarritoCompras({ children }) {
                 id_producto: item.id,
                 cantidad: item.cantidad
             })),
-            total: precioTotal // Usar el total calculado
+            total: precioTotal
         };
     
         console.log('Enviando datos de compra:', compraData);
@@ -119,8 +125,9 @@ function CarritoCompras({ children }) {
                                 </div>
                             ))}
                         </div>
-                        <div className="modal-footer">
+                        <div className="modal-footer d-flex flex-column align-items-start">
                             <p className="texto-negro"> Total: ${precioTotal.toLocaleString()}</p>
+                            <p className="texto-negro"> Total con Descuento: ${precioTotalConDescuento.toLocaleString()}</p>
                         </div>
                         <div className="modal-footer texto-negro">
                             <button type="button" className="btn btn-danger" onClick={handleVaciarCarrito} data-bs-dismiss="modal" disabled={productosCarrito.length === 0}>Borrar Carrito</button>
@@ -172,8 +179,9 @@ function CarritoCompras({ children }) {
                                 </div>
                             ))}
                         </div>
-                        <div className="modal-footer">
+                        <div className="modal-footer d-flex flex-column align-items-start">
                             <p className="texto-negro"> Total: ${precioTotal.toLocaleString()}</p>
+                            <p className="texto-negro"> Total con Descuento: ${precioTotalConDescuento.toLocaleString()}</p>
                         </div>
                         <div className="modal-footer texto-negro">
                             <button type="button" className="btn btn-success" onClick={handleConfirmarCompra} data-bs-target="#confirmacionCompra" data-bs-toggle="modal" disabled={productosCarrito.length === 0}>Confirmar Compra</button>
