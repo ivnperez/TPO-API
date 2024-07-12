@@ -37,6 +37,8 @@ function CatalogoABM() {
     desarrollador: "",
     tipo: "",
     stock: 0,
+    descuento: 0.0,
+    flag_destacar: false // Asegúrate de que el campo sea booleano
   });
 
   useEffect(() => {
@@ -142,6 +144,8 @@ function CatalogoABM() {
       desarrollador: "",
       tipo: "",
       stock: 0,
+      descuento: 0.0,
+      flag_destacar: false // Asegúrate de que el campo sea booleano
     });
     setShowModal(true);
   };
@@ -377,6 +381,34 @@ function CatalogoABM() {
                 }
               />
             </Form.Group>
+            {/* Nuevos campos */}
+            <Form.Group controlId="formDescuento">
+              <Form.Label>Descuento</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.01"
+                value={nuevoProducto.descuento}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    descuento: parseFloat(e.target.value)
+                  })
+                }
+              />
+            </Form.Group>
+            <Form.Group controlId="formFlagDestacar">
+              <Form.Check
+                type="checkbox"
+                label="Flag Destacar"
+                checked={nuevoProducto.flag_destacar}
+                onChange={(e) =>
+                  setNuevoProducto({
+                    ...nuevoProducto,
+                    flag_destacar: e.target.checked
+                  })
+                }
+              />
+            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -393,5 +425,3 @@ function CatalogoABM() {
 }
 
 export default CatalogoABM;
-
-

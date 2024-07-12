@@ -4,7 +4,7 @@ const urlServer2 = "http://localhost:8080/"; //Esta  es la URL del back
 
 
 //GETs
-const obtenerUltimoID = () => {
+const obtenerUltimoID = () => { // no se usa
     return fetch(urlServer + `productos`)
       .then((response) => {
         if (!response.ok) {
@@ -18,7 +18,7 @@ const obtenerUltimoID = () => {
       });
   };
   
-  export const getProductos = () => {
+  export const getProductos = () => { // se usa
     return fetch(urlServer2 + `catalogo`)
       .then((response) => {
         if (!response.ok) {
@@ -32,7 +32,7 @@ const obtenerUltimoID = () => {
       });
   };
 
-export const getProductoByID = (id) => {
+export const getProductoByID = (id) => { // no se usa
   return fetch(urlServer + `productos/${id}`)
     .then((response) => {
       if (!response.ok) {
@@ -49,7 +49,7 @@ export const getProductoByID = (id) => {
     });
 };
 
-export const getProductosDestacados = () => {
+export const getProductosDestacados = () => { // se usa
   return fetch(urlServer + `productos/`)
     .then((response) => {
       console.log("Response getProductosDestacados:", response);
@@ -66,7 +66,7 @@ export const getProductosDestacados = () => {
     });
 };
 
-export const getJuegos = () => {
+export const getJuegos = () => { // pasarlo pero hay que cambiar el nombre a get tipo
   return fetch(urlServer + `productos/`)
     .then((response) => {
       console.log("Response getJuegos:", response);
@@ -83,7 +83,7 @@ export const getJuegos = () => {
     });
 };
 
-export const getConsolas = () => {
+export const getConsolas = () => { // no se usa
   return fetch(urlServer + `productos/`)
     .then((response) => {
       console.log("Response getConsolas:", response);
@@ -111,6 +111,7 @@ export const agregarProducto = (producto) => {
   formData.append("desarrollador", producto.desarrollador);
   formData.append("tipo", producto.tipo);
   formData.append("stock", producto.stock);
+  formData.append("flag_destacar", producto.flag_destacar);
 
   console.log("FormData antes de enviar:");
   for (let pair of formData.entries()) {
