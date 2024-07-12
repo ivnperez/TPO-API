@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,12 @@ function CarritoCompras({ children }) {
     const navigate = useNavigate();
     const productosCarrito = useSelector(state => state.carrito.productos);
     const usuario = useSelector(state => state.auth.user);
+    const [error, setError] = useState(null);
+    const [isConfirming, setIsConfirming] = useState(false);
+    
+    useEffect(() => {
+        setError(null);
+    }, [productosCarrito]);
 
     const precioTotal = productosCarrito.reduce((total, producto) => {
         const precioString = producto.precio.toString().replace(/[^\d]+/g, ''); // Conversión a cadena antes de usar replace
@@ -24,6 +30,32 @@ function CarritoCompras({ children }) {
         const precioDescuento = parseFloat(precioDescuentoString);
         return total + (precioDescuento * producto.cantidad);
     }, 0);
+
+    const cerrarModales = () => {
+        const modales = ['carritoModal', 'checkoutCompra', 'confirmacionCompra'];
+        modales.forEach(modalId => {
+            const modalElement = document.getElementById(modalId);
+            if (modalElement) {
+                let modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+                if (!modalInstance) {
+                    modalInstance = new window.bootstrap.Modal(modalElement);
+                }
+                if (modalInstance) {
+                    console.log(`Cerrando modal: ${modalId}`);
+                    modalInstance.hide();
+                    modalElement.classList.remove('show');
+                    modalElement.setAttribute('aria-hidden', 'true');
+                    modalElement.style.display = 'none';  // Asegúrate de configurar display: none
+                    document.body.classList.remove('modal-open');  // Quitar la clase modal-open del body
+                    document.querySelector('.modal-backdrop')?.remove();  // Quitar cualquier backdrop
+                } else {
+                    console.log(`No se encontró instancia de modal para: ${modalId}`);
+                }
+            } else {
+                console.log(`No se encontró el elemento modal: ${modalId}`);
+            }
+        });
+    };
 
     const handleAgregarUnidad = (producto) => {
         dispatch(agregarProducto({ ...producto, cantidad: 1 }));
@@ -43,64 +75,80 @@ function CarritoCompras({ children }) {
 
     const handleConfirmarCompra = () => {
         console.log('Carrito actual antes de confirmar compra:', productosCarrito);
-        if (!usuario) {
-            console.error('Usuario no autenticado');
+        if (!usuario?.access_token) {
+            setError('Debe iniciar sesión para confirmar la compra');
             return;
         } else {
             console.log('Usuario autenticado:', usuario);
+            setError(null); // Limpiar el error si el usuario está autenticado
         }
     
         const usuarioId = usuario.id;
-        if (!usuarioId) {
-            console.error('usuarioId no está definido:', usuario);
-            return;
-        }
-    
+        
         const compraData = {
             id_usuario: usuarioId,
             detalles: productosCarrito.map(item => ({
                 id_producto: item.id,
                 cantidad: item.cantidad
             })),
-            total: precioTotal
+            total: precioTotalConDescuento // Usar el total con descuento calculado
         };
     
         console.log('Enviando datos de compra:', compraData);
     
+        setIsConfirming(true); // Deshabilitar el botón mientras se confirma la compra
         dispatch(confirmarCompra(compraData))
             .then((result) => {
                 if (result.type === 'carrito/confirmarCompra/fulfilled') {
-                    document.getElementById("confirmacionCompra").style.display = "block";
+                    setError(null); // Limpiar errores en caso de éxito
+                    cerrarModales(); // Asegúrate de cerrar todos los modales primero
+                    const confirmacionModalElement = document.getElementById('confirmacionCompra');
+                    const confirmacionModalInstance = window.bootstrap.Modal.getOrCreateInstance(confirmacionModalElement);
+                    confirmacionModalInstance.show();
                 } else {
-                    console.error('Error al confirmar la compra:', result.payload);
+                    const errorMessage = result.payload?.error || 'Error al confirmar la compra';
+                    setError(errorMessage);
+                    console.error('Error al confirmar la compra:', errorMessage);
                 }
+            })
+            .finally(() => {
+                setIsConfirming(false); // Habilitar el botón después de la confirmación
             });
     };
+    
 
     const handleRedireccionarInicio = () => {
         handleVaciarCarrito();
-        const modales = ['carritoModal', 'checkoutCompra', 'confirmacionCompra'];
-        modales.forEach(modalId => {
-            const modalElement = document.getElementById(modalId);
-            if (modalElement) {
-                const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
-                if (modalInstance) {
-                    modalInstance.hide();
-                }
-            }
-        });
+        cerrarModales();
+        const confirmacionModalElement = document.getElementById('confirmacionCompra');
+        const confirmacionModalInstance = window.bootstrap.Modal.getInstance(confirmacionModalElement);
+        if (confirmacionModalInstance) {
+            console.log('Cerrando modal de confirmación');
+            confirmacionModalInstance.hide();
+        } else {
+            console.log('No se encontró instancia de modal de confirmación');
+        }
         navigate('/');
+    };
+
+    const handleCloseCheckoutModal = () => {
+        handleModalHide();
+        cerrarModales();
+    };
+
+    const handleModalHide = () => {
+        setError(null);
     };
 
     return (
         <div>
             {children}
-            <div className="modal fade" id="carritoModal" tabIndex="-1" data-bs-backdrop="false" aria-labelledby="carritoModalLabel" aria-hidden="true">
+            <div className="modal fade" id="carritoModal" tabIndex="-1" data-bs-backdrop="false" aria-labelledby="carritoModalLabel" aria-hidden="true" onHide={handleModalHide}>
                 <div className="modal-dialog modal-dialog-scrollable">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="carritoModalLabel">Carrito de Compras</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleModalHide}></button>
                         </div>
                         <div className="modal-body">
                             {productosCarrito.map((producto, index) => (
@@ -131,7 +179,8 @@ function CarritoCompras({ children }) {
                         </div>
                         <div className="modal-footer texto-negro">
                             <button type="button" className="btn btn-danger" onClick={handleVaciarCarrito} data-bs-dismiss="modal" disabled={productosCarrito.length === 0}>Borrar Carrito</button>
-                            <button type="button" className="btn btn-success" data-bs-target="#checkoutCompra" data-bs-toggle="modal" disabled={productosCarrito.length === 0}>Comprar</button>
+                            <button type="button" className="btn btn-success" data-bs-target={usuario?.access_token ? "#checkoutCompra" : ""} data-bs-toggle={usuario?.access_token ? "modal" : ""} onClick={!usuario?.access_token ? () => setError('Debe iniciar sesión para confirmar la compra') : null} disabled={productosCarrito.length === 0}>Comprar</button>
+                            {error && <div className="alert alert-danger mt-3 w-100">{error}</div>}
                         </div>
                     </div>
                 </div>
@@ -142,32 +191,9 @@ function CarritoCompras({ children }) {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title texto-negro" id="carritoModalLabel2">Checkout</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseCheckoutModal}></button>
                         </div>
                         <div className="modal-body">
-                            <div className="mb-3">
-                                <p className="texto-negro">Nombre y Apellido</p>
-                                <input type="text" className="form-control" id="nombre" placeholder="Nombre y Apellido" />
-                            </div>
-                            <div className="mb-3">
-                                <p className="texto-negro">Direccion</p>
-                                <input type="text" className="form-control" id="direccion" placeholder="Dirección" />
-                            </div>
-                            <div className="mb-3">
-                                <p className="texto-negro">Código Postal</p>
-                                <input type="text" className="form-control" id="codigoPostal" placeholder="Código Postal" />
-                            </div>
-                            <div className="mb-3">
-                                <p className="texto-negro">Número de Tarjeta</p>
-                                <input type="text" className="form-control" id="tarjeta" placeholder="Número de Tarjeta" />
-                            </div>
-                            <div className="mb-3">
-                                <p className="texto-negro">Fecha de Vencimiento</p>
-                                <input type="text" className="form-control" id="fechaVencimiento" placeholder="MM/AA" />
-                            </div>
-                            <div className="mb-3">
-                                <p className="texto-negro">CCV</p>
-                                <input type="text" className="form-control" id="ccv" placeholder="CCV" />
-                            </div>
                             <hr className="my-4" />
                             <div className='mb-3'>
                                 <p className="texto-negro">Productos</p>
@@ -184,7 +210,15 @@ function CarritoCompras({ children }) {
                             <p className="texto-negro"> Total con Descuento: ${precioTotalConDescuento.toLocaleString()}</p>
                         </div>
                         <div className="modal-footer texto-negro">
-                            <button type="button" className="btn btn-success" onClick={handleConfirmarCompra} data-bs-target="#confirmacionCompra" data-bs-toggle="modal" disabled={productosCarrito.length === 0}>Confirmar Compra</button>
+                            <button 
+                                type="button" 
+                                className="btn btn-success" 
+                                onClick={handleConfirmarCompra} 
+                                disabled={productosCarrito.length === 0 || isConfirming}
+                            >
+                                Confirmar Compra
+                            </button>
+                            {error && <div className="alert alert-danger mt-3 w-100">{error}</div>}
                         </div>
                     </div>
                 </div>
