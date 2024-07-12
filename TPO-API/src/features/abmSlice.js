@@ -21,17 +21,23 @@ const agregarProducto = (producto) => {
   const formData = new FormData();
   formData.append("nombre", producto.nombre);
   formData.append("descripcion", producto.descripcion);
-  formData.append("imagen", producto.imagen); // La imagen debe ser un Blob/File
+  formData.append("imagen", producto.imagen);
   formData.append("precio", producto.precio);
-  formData.append("descuento", producto.descuento || 0); // Default value if descuento is null
+  formData.append("descuento", producto.descuento || 0);
   formData.append("lanzamiento", producto.anioLanzamiento);
   formData.append("desarrollador", producto.desarrollador);
   formData.append("tipo", producto.tipo);
   formData.append("stock", producto.stock);
   formData.append("flag_destacar", producto.flag_destacar);
 
+  const token = localStorage.getItem('accessToken'); // Obtener el token de localStorage
+  console.log('Token:', token); // Log para verificar el token
+
   return fetch(`${urlServer2}abm`, {
     method: "POST",
+    headers: {
+      'Authorization': `Bearer ${token}`, // Incluir el token en los headers
+    },
     body: formData
   })
     .then((response) => {
@@ -51,28 +57,24 @@ const agregarProducto = (producto) => {
 };
 
 const eliminarProducto = (id) => {
+  const token = localStorage.getItem('accessToken'); // Obtener el token de localStorage
+
   return fetch(`${urlServer2}abm/${id}`, {
     method: "DELETE",
+    headers: {
+      'Authorization': `Bearer ${token}`, // Incluir el token en los headers
+    },
   }).then(response => response.json());
 };
 
 const modificarProducto = (producto) => {
-  console.log(JSON.stringify({
-    id: producto.id,
-    nombre: producto.nombre,
-    descripcion: producto.descripcion,
-    precio: producto.precio,
-    descuento: producto.descuento || 0, // Default value if descuento is null
-    lanzamiento: producto.anioLanzamiento,
-    desarrollador: producto.desarrollador,
-    tipo: producto.tipo,
-    stock: producto.stock,
-    flag_destacar: producto.flag_destacar
-  }));
+  const token = localStorage.getItem('accessToken'); // Obtener el token de localStorage
+
   return fetch(`${urlServer2}abm`, {
     method: "PUT",
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`, // Incluir el token en los headers
     },
     body: JSON.stringify({
       id: producto.id,
@@ -88,9 +90,6 @@ const modificarProducto = (producto) => {
     })
   }).then(response => response.json());
 };
-
-
-
 
 // Thunks para operaciones asíncronas
 export const fetchProductos = createAsyncThunk('productos/fetchProductos', async () => {
@@ -149,3 +148,4 @@ const abmSlice = createSlice({
 });
 
 export default abmSlice.reducer;
+
